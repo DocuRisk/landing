@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Semantic design tokens (RGB triplets for Tailwind alpha support) */
+  --background: 28 25 40;
+  /* #1C1928 */
+  --background-dark: 20 17 26;
+  /* #14111A */
+  --foreground: 255 255 255;
+  /* white */
+  --muted: 155 164 191;
+  /* #9BA4BF */
+  --card: 43 39 60;
+  /* slightly lighter than background */
+  --border: 255 255 255;
+  /* used with low alpha */
+  --primary: 255 255 255;
+  /* white */
+  --accent: 120 40 242;
+  /* #6600FF */
+  --accent-2: 157 99 245;
+  /* #9D63F5 */
+  --accent-foreground: 255 255 255;
+  /* white text */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: 234 238 252;
+  }
+}
+
+html {
+  min-height: 100%;
+  background:
+    radial-gradient(900px circle at 18% -10%, rgb(var(--accent) / 0.65), transparent 90%),
+    radial-gradient(800px circle at 85% 110%, rgb(var(--accent) / 0.15), transparent 55%),
+    radial-gradient(1200px circle at 50% 50%, rgb(var(--background-dark) / 0.9), transparent 65%),
+    radial-gradient(ellipse 130% 120% at 50% 50%, transparent 55%, rgb(var(--accent-foreground) / 0.9) 100%),
+    rgb(var(--background));
+  background-attachment: scroll;
+}
+
+body {
+  color: rgb(var(--foreground));
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.text-spacing-tight {
+  letter-spacing: -0.036em;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-300 active:translate-y-0 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/30;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-accent-foreground hover:bg-accent-2 hover:scale-[1.02] hover:shadow-[0_10px_40px_-10px_rgb(var(--accent)/0.4)];
+    letter-spacing: -0.036em;
+    font-weight: 600;
+  }
+
+  .btn-secondary {
+    @apply bg-white/5 text-foreground ring-1 ring-white/10;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-muted ring-1 ring-white/10;
+  }
+
+  .card {
+    @apply rounded-2xl bg-card/70 ring-1 ring-white/10 backdrop-blur transition-all duration-300;
+  }
+
+  .bento-card {
+    @apply rounded-[2rem] bg-card/40 ring-1 ring-white/10 backdrop-blur-xl transition-all duration-500 overflow-hidden relative;
+  }
+
+  .glass-panel {
+    @apply bg-white/5 ring-1 ring-white/10 backdrop-blur-md rounded-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70;
+  }
+
+  /* Линии по краям контента — слева и справа */
+  .document-edge-line {
+    background: rgb(var(--accent-foreground) / 0.04);
+  }
+
+  /* Горизонтальные линии в начале и конце секции — на всю ширину контента */
+  .section-document {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgb(var(--accent-foreground) / 0.04);
+    /* border-bottom: 1px solid rgb(var(--accent) / 0.4); */
+  }
+}
