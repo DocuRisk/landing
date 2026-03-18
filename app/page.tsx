@@ -9,9 +9,7 @@ import {
   ScanEye,
   ListChecks,
   History,
-  BookText,
-  FileCheck,
-  AlertTriangle
+  BookText
 } from 'lucide-react'
 import FAQItem from "./components/FAQItem"
 
