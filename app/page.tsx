@@ -9,7 +9,9 @@ import {
   ScanEye,
   ListChecks,
   History,
-  BookText
+  BookText,
+  FileCheck,
+  AlertTriangle
 } from 'lucide-react'
 import FAQItem from "./components/FAQItem"
 
@@ -143,36 +145,24 @@ export default function Home() {
       </div>
 
       <main className="mx-auto max-w-6xl px-6 relative z-10">
-        <section className="section-document pt-6 sm:pt-16 pb-6 sm:pb-16 relative z-10">
-          <h1 className="font-serif text-balance text-3xl font-semibold text-center sm:text-left tracking-tight sm:text-5xl lg:text-6xl leading-[1.15]">
+        <section className="section-document pt-6 sm:pt-16 pb-6 flex flex-col items-center sm:pb-16 z-10">
+          <h1 className="font-serif text-balance text-3xl font-semibold text-center tracking-tight sm:text-5xl lg:text-6xl leading-[1.15]">
             Покажем риски в договоре <br className="hidden sm:block" /> <span className="text-gradient">до того</span>, как они станут проблемой.
           </h1>
-          <p className="mt-6 sm:mt-8 font-sans font-semibold text-pretty text-center sm:text-left text-lg sm:text-2xl lg:text-2xl text-muted max-w-3xl leading-tight tracking-tight">
-            90% договоров содержат скрытые риски — найдём их за 1 минуту<br className="hidden sm:block"/>и объясним простым языком.
+          <p className="mt-6 sm:mt-8 font-sans font-semibold text-pretty text-center text-lg sm:text-2xl lg:text-2xl text-muted max-w-3xl leading-tight tracking-tight">
+            90% договоров содержат скрытые риски — найдём их за 1 минуту<br className="hidden sm:block" />и объясним простым языком.
           </p>
 
-          <div className="mt-12 flex flex-wrap items-start items-top gap-4 justify-center lg:justify-start">
-            <div className="">
-              <a
-                className="btn btn-primary text-accent-foreground text-lg px-8 py-4"
-                href="https://t.me/dogovor_check_bot"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src="/tg.svg" alt="Telegram" width={24} height={24} />
-                Проверить договор в Telegram
-              </a>
-              <div className="pt-5">
-                <div className="text-center text-muted text-sm">
-                  бесплатно • без регистрации • от 1 минуты
-                </div>
-                <div className="text-center mt-2">
-                  <BookText className="size-4 inline-block mr-1" />
-                  <a href="https://storage.yandexcloud.net/dogovorcheck.ru/dogovorcheck_example.pdf" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground"> Пример анализа договора аренды</a>
-                </div>
-              </div>
-
-            </div>
+          <div className="mt-12 flex flex-wrap items-start items-top gap-4 justify-center">
+            <a
+              className="btn btn-primary text-accent-foreground text-lg px-8 py-4"
+              href="https://t.me/dogovor_check_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/tg.svg" alt="Telegram" width={24} height={24} />
+              Проверить договор в Telegram
+            </a>
             <a
               className="btn btn-secondary text-lg px-8 py-4 disabled opacity-60 cursor-not-allowed"
               href="#"
@@ -187,6 +177,34 @@ export default function Home() {
 
           </div>
 
+          <div className="pt-5">
+            <div className="text-center text-muted text-sm">
+              бесплатно • без регистрации • от 1 минуты
+            </div>
+            <div className="text-center mt-2">
+              <BookText className="size-4 inline-block mr-1" />
+              <a href="https://storage.yandexcloud.net/dogovorcheck.ru/dogovorcheck_example.pdf" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground"> Пример анализа договора аренды</a>
+            </div>
+          </div>
+
+        </section>
+
+        {/* Stats block */}
+        <section className="section-document pt-6 sm:pt-12 pb-6 sm:pb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 items-center justify-center gap-4 sm:gap-6">
+            <div className="text-center">
+              <p className="text-5xl sm:text-7xl font-serif text-balance font-regular tracking-tight">100+</p>
+              <p className="text-muted font-semibold text-base sm:text-base mt-1">проверено договоров</p>
+            </div>
+            <div className="text-center">
+              <p className="text-5xl sm:text-7xl font-regular text-balance font-serif tracking-tight">200+</p>
+              <p className="text-muted font-semibold text-base sm:text-base mt-1">сэкономлено часов</p>
+            </div>
+            <div className="text-center">
+              <p className="text-5xl sm:text-7xl font-regular text-balance font-serif tracking-tight">600+</p>
+              <p className="text-muted font-semibold text-base sm:text-base mt-1">найдено опасных пунктов</p>
+            </div>
+          </div>
         </section>
 
         {/* Sticky Layout: What AI checks */}
@@ -293,7 +311,7 @@ export default function Home() {
         </section>
 
         {/* FAQ Section */}
-        <section className="section-document max-w-full mx-auto  pt-6 sm:pt-16 pb-6 sm:pb-16">
+        <section className="section-document max-w-full mx-auto pt-6 sm:pt-16 pb-6 sm:pb-16">
           <div className="text-center">
             <h2 className="font-serif text-balance text-3xl font-semibold tracking-tight sm:text-5xl text-gradient pb-2">
               Частые вопросы
@@ -318,7 +336,7 @@ export default function Home() {
               rel="noopener noreferrer"
             >
               <Image src="/tg.svg" alt="Telegram" width={24} height={24} />
-              Проверить договор в Telegram
+              Проверить договор
             </a>
           </div>
         </section>
