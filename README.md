@@ -34,3 +34,30 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Deploy on Dokploy
+
+Проект подготовлен для деплоя в [Dokploy](https://dokploy.com).
+
+### Вариант 1: Git Provider (сборка на сервере)
+
+1. Создайте приложение в Dokploy
+2. Выберите **Source Type** → **Git**
+3. Укажите репозиторий, ветку `main`, Build path: `/`
+4. Dokploy обнаружит Dockerfile и соберёт образ
+5. Сгенерируйте домен и укажите порт **3000**
+
+### Вариант 2: Docker Image (рекомендуется для production)
+
+Соберите образ через CI/CD (GitHub Actions) и загрузите в Docker Hub:
+
+```bash
+docker build -t your-username/docurisk-landing:latest .
+docker push your-username/docurisk-landing:latest
+```
+
+В Dokploy: **Source Type** → **Docker**, укажите `your-username/docurisk-landing:latest`.
+
+### Health Check
+
+Для health check в Dokploy используйте endpoint `/health` (возвращает `{"status":"ok"}`).
