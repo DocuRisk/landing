@@ -12,6 +12,7 @@ import {
   BookText
 } from 'lucide-react'
 import FAQItem from "./components/FAQItem"
+import CountUp from "./components/CountUp"
 
 const features = [
   {
@@ -145,10 +146,12 @@ export default function Home() {
       <main className="mx-auto max-w-6xl px-6 relative z-10">
         <section className="section-document pt-6 sm:pt-16 pb-6 flex flex-col items-center sm:pb-16 z-10">
           <h1 className="font-serif text-balance text-3xl font-semibold text-center tracking-tight sm:text-5xl lg:text-6xl leading-[1.15]">
-            Покажем риски в договоре <br className="hidden sm:block" /> <span className="text-gradient">до того</span>, как они станут проблемой.
+            Найдём риски в договоре <br className="hidden sm:block" /> до того, как вы его подпишете
           </h1>
-          <p className="mt-6 sm:mt-8 font-sans font-semibold text-pretty text-center text-lg sm:text-2xl lg:text-2xl text-muted max-w-3xl leading-tight tracking-tight">
-            90% договоров содержат скрытые риски — найдём их за 1 минуту<br className="hidden sm:block" />и объясним простым языком.
+          <p className="mt-8 sm:mt-8 font-sans font-semibold text-pretty text-center text-lg sm:text-2xl lg:text-2xl text-muted max-w-3xl leading-tight tracking-tight">
+
+            В <span className="text-primary">90%</span> договоров есть <span className="text-primary">пункты</span>, которые легко пропустить — <br className="hidden sm:block" />
+            покажем их за <span className="text-primary">1 минуту</span> и объясним простым языком
           </p>
 
           <div className="mt-12 flex flex-wrap items-start items-top gap-4 justify-center">
@@ -177,7 +180,7 @@ export default function Home() {
 
           <div className="pt-5">
             <div className="text-center text-muted text-sm">
-              бесплатно • без регистрации • от 1 минуты
+              Попробовать бесплатно • без регистрации • от 1 минуты
             </div>
             <div className="text-center mt-2">
               <BookText className="size-4 inline-block mr-1" />
@@ -191,15 +194,32 @@ export default function Home() {
         <section className="section-document pt-6 sm:pt-12 pb-6 sm:pb-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 items-center justify-center gap-4 sm:gap-6">
             <div className="text-center">
-              <p className="text-5xl sm:text-7xl font-serif text-balance font-regular tracking-tight">100+</p>
+              <CountUp
+                target={100}
+                suffix="+"
+                duration={2000}
+                className="text-5xl sm:text-7xl font-serif text-balance font-regular tracking-tight"
+              />
               <p className="text-muted font-semibold text-base sm:text-base mt-1">проверено договоров</p>
             </div>
             <div className="text-center">
-              <p className="text-5xl sm:text-7xl font-regular text-balance font-serif tracking-tight">200+</p>
+              <CountUp
+                target={200}
+                suffix="+"
+                duration={2000}
+                delay={100}
+                className="text-5xl sm:text-7xl font-regular text-balance font-serif tracking-tight"
+              />
               <p className="text-muted font-semibold text-base sm:text-base mt-1">сэкономлено часов</p>
             </div>
             <div className="text-center">
-              <p className="text-5xl sm:text-7xl font-regular text-balance font-serif tracking-tight">600+</p>
+              <CountUp
+                target={600}
+                suffix="+"
+                duration={2000}
+                delay={120}
+                className="text-5xl sm:text-7xl font-regular text-balance font-serif tracking-tight"
+              />
               <p className="text-muted font-semibold text-base sm:text-base mt-1">найдено опасных пунктов</p>
             </div>
           </div>
