@@ -9,7 +9,8 @@ import {
   ScanEye,
   ListChecks,
   History,
-  BookText
+  BookText,
+  Construction,
 } from 'lucide-react'
 import FAQItem from "./components/FAQItem"
 import CountUp from "./components/CountUp"
@@ -126,6 +127,17 @@ export default function Home() {
   const year = new Date().getFullYear()
   return (
     <div className="min-h-screen relative overflow-hidden">
+      <div
+        className="relative z-30 w-full border-b border-amber-500/25 bg-amber-950/50 px-4 py-3 text-center text-sm text-amber-50/95 backdrop-blur-sm sm:text-base"
+        role="status"
+        aria-live="polite"
+      >
+        <Construction
+          className="inline-block size-4 align-[-0.125em] mr-2 text-amber-400/90 sm:size-[1.125rem]"
+          aria-hidden
+        />
+        Ведутся технические работы. Скоро работа сервиса будет восстановлена.
+      </div>
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 relative z-20">
         <div className="flex pt-3 items-center gap-4">
           <Image src="/logo.svg" alt="ДоговорCheck" width={260} height={44} priority />

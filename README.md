@@ -35,29 +35,23 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Deploy on Dokploy
+## Статический экспорт
 
-Проект подготовлен для деплоя в [Dokploy](https://dokploy.com).
+Сборка (`next build`) с [`output: "export"`](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) кладёт готовый сайт в каталог **`out/`** — его можно отдавать с любого CDN или static hosting без Node.js в рантайме.
 
-### Вариант 1: Git Provider (сборка на сервере)
-
-1. Создайте приложение в Dokploy
-2. Выберите **Source Type** → **Git**
-3. Укажите репозиторий, ветку `main`, Build path: `/`
-4. Dokploy обнаружит Dockerfile и соберёт образ
-5. Сгенерируйте домен и укажите порт **3000**
-
-### Вариант 2: Docker Image (рекомендуется для production)
-
-Соберите образ через CI/CD (GitHub Actions) и загрузите в Docker Hub:
+Локально после `npm run build`:
 
 ```bash
-docker build -t your-username/docurisk-landing:latest .
-docker push your-username/docurisk-landing:latest
+npx serve out
 ```
 
-В Dokploy: **Source Type** → **Docker**, укажите `your-username/docurisk-landing:latest`.
+### DigitalOcean App Platform (Static Site)
 
-### Health Check
+1. Создайте ресурс **Static Site**, привяжите репозиторий.
+2. **Build command:** `npm ci && npm run build`
+3. **Output directory:** `out`
+4. Укажите **Node.js 20.x** (или совместимую LTS), если платформа спрашивает версию.
 
-Для health check в Dokploy используйте endpoint `/health` (возвращает `{"status":"ok"}`).
+### Health check
+
+Статический файл [`public/health.json`](public/health.json) попадает в `out/health.json`. Для проверки доступности укажите путь **`/health.json`** (ответ: `{"status":"ok"}`).
