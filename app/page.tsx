@@ -10,7 +10,7 @@ import {
   ListChecks,
   History,
   BookText,
-  Construction,
+  // Construction,
 } from 'lucide-react'
 import FAQItem from "./components/FAQItem"
 import CountUp from "./components/CountUp"
@@ -127,7 +127,7 @@ export default function Home() {
   const year = new Date().getFullYear()
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div
+      {/* <div
         className="relative z-30 w-full border-b border-amber-500/25 bg-amber-950/50 px-4 py-3 text-center text-sm text-amber-50/95 backdrop-blur-sm sm:text-base"
         role="status"
         aria-live="polite"
@@ -137,7 +137,7 @@ export default function Home() {
           aria-hidden
         />
         Ведутся технические работы. Скоро работа сервиса будет восстановлена.
-      </div>
+      </div> */}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 relative z-20">
         <div className="flex pt-3 items-center gap-4">
           <Image src="/logo.svg" alt="ДоговорCheck" width={260} height={44} priority />
