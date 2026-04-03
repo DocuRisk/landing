@@ -8,6 +8,7 @@ import {
   Scale,
   ListChecks,
   History,
+  ChartArea,
   BookText,
   Bot,
   SlidersHorizontal,
@@ -262,10 +263,22 @@ export default function Home() {
             <div className="text-center font-medium text-muted text-sm text-green-300">
               Попробовать бесплатно • без регистрации • от 1 минуты
             </div>
-            <div className="text-center mt-2">
-              <BookText className="size-4 inline-block mr-1" />
-              <a href="https://storage.yandexcloud.net/dogovorcheck.ru/dogovorcheck_example.pdf" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground"> Пример анализа договора аренды</a>
+            <div className="flex flex-row items-center justify-center gap-4 mt-2">
+              <div className="flex items-center">
+                <ChartArea className="size-4 inline-block mr-1" />
+                <a href="https://storage.yandexcloud.net/dogovorcheck-assets/dogovorcheck_example.pdf" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground">
+                  Пример анализа
+                </a>
+              </div>
+
+              <div className="flex items-center">
+                <BookText className="size-4 inline-block mr-1" />
+                <a href="https://storage.yandexcloud.net/dogovorcheck-assets/dogovorcheck_example_gen.docx" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground">
+                  Пример генерации
+                </a>
+              </div>
             </div>
+
           </div>
 
         </section>
@@ -351,9 +364,6 @@ export default function Home() {
                     </span>
                     <h3 className="text-xl sm:text-2xl font-semibold mb-3 tracking-tight text-foreground/95">{step.name}</h3>
                     <p className="text-muted text-sm leading-tight tracking-tight font-semibold max-w-[280px] text-center">{step.description}</p>
-                    {step.step === 3 && (
-                      <a href="https://storage.yandexcloud.net/dogovorcheck.ru/dogovorcheck_example.pdf" target="_blank" rel="noopener noreferrer" className="mt-4 btn btn-secondary text-base">Пример отчета</a>
-                    )}
                   </div>
                 </div>
               ))}
@@ -476,7 +486,7 @@ export default function Home() {
         </section>
 
         <section className="section-document pt-6 sm:pt-16 pb-6 sm:pb-16 bg-accent/5">
-          <div className="flex justify-center flex-row items-center gap-4">
+          <div className="flex justify-center md:flex-row flex-col items-center gap-4">
             <a
               className="btn btn-secondary text-accent-foreground text-lg px-8 py-4"
               href="https://t.me/dogovor_check_bot"
@@ -505,6 +515,14 @@ export default function Home() {
             © {year} Договор<span className="italic">Чек</span>. Все права защищены.
           </p>
           <div className="flex gap-6">
+            <a
+              className="text-sm text-muted hover:text-foreground hover:underline transition"
+              href="mailto:admin@dogovorcheck.ru"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Поддержка
+            </a>
             <Link
               href="/privacy"
               className="text-sm text-muted hover:text-foreground hover:underline transition"
