@@ -9,8 +9,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-manrope)', 'sans-serif'],
-        serif: ['Georgia', 'Times New Roman', 'serif'],
+        sans: [
+          "var(--font-onest, ui-sans-serif)",
+          "system-ui",
+          "sans-serif",
+        ],
+        serif: [
+          "var(--font-literata, ui-serif)",
+          "Georgia",
+          "serif",
+        ],
       },
       colors: {
         background: "rgb(var(--background) / <alpha-value>)",

@@ -1,16 +1,26 @@
 import type { Metadata } from "next";
 import CookieConsent from "./components/CookieConsent";
-import { Manrope } from "next/font/google";
+import { Literata, Onest } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
+const onest = Onest({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
+  variable: "--font-onest",
+  display: "swap",
+  adjustFontFallback: true,
+});
+
+const literata = Literata({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-literata",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
   title: "ДоговорCheck",
-  description: "ИИ-сервис для проверки контрактов на скрытые пункты и невыгодные условия.",
+  description: "ИИ-сервис для проверки и генерации документов.",
 };
 
 export default function RootLayout({
@@ -19,9 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={manrope.variable}>
+    <html lang="ru" className={`${onest.variable} ${literata.variable}`}>
       <body
-        className="font-sans antialiased text-foreground"
+        className={`${onest.className} antialiased text-foreground`}
       >
         {children}
         <CookieConsent />
