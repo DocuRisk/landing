@@ -194,7 +194,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* ─── Header ─── */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center px-6 py-4">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-6 py-4">
           <Image
             src="/logo.svg"
             alt="ДоговорCheck"
@@ -203,6 +203,26 @@ export default function Home() {
             priority
             className="brightness-0"
           />
+          <nav className="flex shrink-0 items-center gap-3 sm:gap-5" aria-label="Запуск бота">
+            <a
+              className="header-bot-link flex items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent"
+              href="https://t.me/dogovor_check_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/tg_black.svg" alt="" className="header-bot-icon" width={20} height={20} />
+              Telegram-бот
+            </a>
+            <a
+              className="header-bot-link flex items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent"
+              href="https://max.ru/id450125033950_1_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/max_black.svg" alt="" className="header-bot-icon" width={20} height={20} />
+              Max-бот
+            </a>
+          </nav>
         </div>
       </header>
 
@@ -245,7 +265,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/tg.svg" alt="Telegram" width={20} height={20} />
+              <Image src="/tg_white.svg" alt="Telegram" width={20} height={20} />
               Запустить в Telegram
             </a>
             <a
@@ -254,7 +274,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/max.svg" alt="Max" className="icon-accent" width={20} height={20} />
+              <Image src="/max_accent.svg" alt="Max" className="icon-accent" width={20} height={20} />
               Запустить в Max
             </a>
           </div>
@@ -535,9 +555,18 @@ export default function Home() {
             <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
               Попробуйте бесплатно прямо сейчас
             </h2>
-            <p className="mt-4 text-base text-muted max-w-xs">
-              24 кредита в подарок после запуска — без регистрации.
-            </p>
+            <div className="mt-6 w-full max-w-md px-5 py-4 text-center sm:px-6">
+              <p className="text-lg font-semibold tracking-tight text-foreground">
+                Получите в два раза больше кредитов
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                <span className="mr-1.5 inline-block line-through decoration-2 decoration-foreground/20">
+                  12 кредитов
+                </span>
+                <span className="font-medium text-accent">24 кредита</span>
+                {' '}для проверки или генерации договоро в боте.
+              </p>
+            </div>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a
                 className="btn btn-primary text-base px-7 py-3.5"
@@ -545,7 +574,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image src="/tg.svg" alt="Telegram" width={20} height={20} />
+                <Image src="/tg_white.svg" alt="Telegram" width={20} height={20} />
                 Открыть в Telegram
               </a>
               <a
@@ -554,7 +583,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image src="/max.svg" alt="Max" width={20} height={20} />
+                <Image src="/max_accent.svg" alt="Max" width={20} height={20} />
                 Открыть в Max
               </a>
             </div>
@@ -566,7 +595,7 @@ export default function Home() {
       <footer className="border-t border-border/60 bg-background py-8 sm:py-12">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-muted/60">
-            © {year} Договор<span className="italic">Чек</span>. Все права защищены.
+            © {year} <span className="font-serif font-semibold">Договор<span className="italic">Чек</span></span>. Все права защищены.
           </p>
           <div className="flex flex-wrap gap-5">
             <a

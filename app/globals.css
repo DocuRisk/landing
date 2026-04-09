@@ -67,8 +67,13 @@ body {
 }
 
 /* Перекрашивает монохромную SVG иконку в акцентный цвет (#6D28D9) */
-.icon-accent {
+.icon-accent,
+.header-bot-link:hover .header-bot-icon {
   filter: brightness(0) saturate(100%) invert(23%) sepia(95%) saturate(1800%) hue-rotate(255deg) brightness(88%);
+}
+
+.header-bot-icon {
+  transition: filter 0.2s ease;
 }
 
 @layer components {
