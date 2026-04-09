@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 import {
   MessageCircleQuestion,
   ScanSearch,
@@ -13,510 +13,564 @@ import {
   Bot,
   SlidersHorizontal,
   SquarePen,
-} from 'lucide-react'
+} from "lucide-react"
 import FAQItem from "./components/FAQItem"
 import CountUp from "./components/CountUp"
+import RevealOnScroll from "./components/RevealOnScroll"
 
 const features = [
   {
-    name: 'Распознавание документов',
+    name: "Распознавание документов",
     description:
-      'Загружайте PDF, DOCX или изображения — сервис автоматически распознает текст.',
+      "Загружайте PDF, DOCX или изображения — сервис автоматически распознает текст.",
     icon: ScanSearch,
   },
   {
-    name: 'Экономия времени',
-    description:
-      'ИИ анализирует договор за минуты и показывает ключевые риски.',
+    name: "Экономия времени",
+    description: "ИИ анализирует договор за минуты и показывает ключевые риски.",
     icon: Timer,
   },
   {
-    name: 'История документов',
+    name: "История документов",
     description:
-      'Все загруженные договоры и результаты анализа сохраняются — вы можете вернуться к ним в любое время.',
+      "Все загруженные договоры и результаты анализа сохраняются — вы можете вернуться к ним в любое время.",
     icon: History,
   },
   {
-    name: 'Вопросы по договору',
+    name: "Вопросы по договору",
     description:
-      'Задавайте вопросы по документу и получайте ответы на основе его содержания.',
+      "Задавайте вопросы по документу и получайте ответы на основе его содержания.",
     icon: MessageCircleQuestion,
-  }
+  },
 ]
 
 const features_create = [
   {
-    name: 'Российская ИИ-модель',
+    name: "Российская ИИ-модель",
     description:
-      'ИИ генерирует договор на основе вашего описания и создает договор. Используется российская ИИ-модель, которая лучше всего работает в России.',
+      "ИИ генерирует договор на основе вашего описания и создает договор. Используется российская ИИ-модель, которая лучше всего работает в России.",
     icon: Bot,
   },
   {
-    name: 'Паритетный договор',
-    description:
-      'ИИ генерирует договор который защищает права и интересы обоих сторон.',
+    name: "Паритетный договор",
+    description: "ИИ генерирует договор который защищает права и интересы обоих сторон.",
     icon: Scale,
   },
   {
-    name: 'Договор под свою задачу',
+    name: "Договор под свою задачу",
     description:
-      'ИИ генерирует договор под вашу задачу, где вы можете изменить пункты договора под себя.',
+      "ИИ генерирует договор под вашу задачу, где вы можете изменить пункты договора под себя.",
     icon: SlidersHorizontal,
   },
   {
-    name: 'Редактирование договора',
+    name: "Редактирование договора",
     description:
-      'Генерируем договор в формате Word, который вы можете редактировать под себя.',
+      "Генерируем договор в формате Word, который вы можете редактировать под себя.",
     icon: SquarePen,
-  }
+  },
 ]
 
 const checks = [
   {
-    name: 'Соберет черновик',
-    description: 'Если шаблона нет, сервис подготовит основу документа за вас.',
+    name: "Соберет черновик",
+    description: "Если шаблона нет, сервис подготовит основу документа за вас.",
     icon: BookText,
   },
   {
-    name: 'Найдет денежные риски',
-    description: 'Покажет штрафы, неустойки, удержание оплаты и другие потери.',
+    name: "Найдет денежные риски",
+    description: "Покажет штрафы, неустойки, удержание оплаты и другие потери.",
     icon: BadgePercent,
   },
   {
-    name: 'Покажет перекос условий',
-    description: 'Подсветит пункты, где у другой стороны больше прав, чем у вас.',
+    name: "Покажет перекос условий",
+    description: "Подсветит пункты, где у другой стороны больше прав, чем у вас.",
     icon: Scale,
   },
   {
-    name: 'Выделит важные пункты',
-    description: 'Отметит сроки, обязанности и формулировки, которые нельзя пропустить.',
+    name: "Выделит важные пункты",
+    description: "Отметит сроки, обязанности и формулировки, которые нельзя пропустить.",
     icon: ListChecks,
   },
 ]
 
-
 const steps = [
   {
     step: 1,
-    name: 'Загрузка',
-    description: 'Отправьте документ в бот в формате Word, PDF, фото или просто текстом.',
-    image: '/step_1.svg',
+    name: "Загрузка",
+    description: "Отправьте документ в бот в формате Word, PDF, фото или просто текстом.",
+    image: "/step_1.svg",
   },
   {
     step: 2,
-    name: 'Анализ',
-    description: 'ИИ обрабатывает документ, находит скрытые условия и спорные формулировки.',
-    image: '/step_2.svg',
+    name: "Анализ",
+    description: "ИИ обрабатывает документ, находит скрытые условия и спорные формулировки.",
+    image: "/step_2.svg",
   },
   {
     step: 3,
-    name: 'Отчет',
-    description: 'Получите выжимку главных рисков с понятными объяснениями и рекомендациями.',
-    image: '/step_3.svg',
+    name: "Отчет",
+    description: "Получите выжимку главных рисков с понятными объяснениями и рекомендациями.",
+    image: "/step_3.svg",
   },
 ]
 
 const steps_create = [
   {
     step: 1,
-    name: 'Описание',
-    description: 'Вы отправляете описание договора, которое хотите создать, например: «Договор аренды квартиры».',
-    image: '/step_create_1.svg',
+    name: "Описание",
+    description:
+      "Вы отправляете описание договора, которое хотите создать, например: «Договор аренды квартиры».",
+    image: "/step_create_1.svg",
   },
   {
     step: 2,
-    name: 'Генерация',
-    description: 'ИИ генерирует пункты документа по вашему описанию.',
-    image: '/step_create_2.svg',
+    name: "Генерация",
+    description: "ИИ генерирует пункты документа по вашему описанию.",
+    image: "/step_create_2.svg",
   },
   {
     step: 3,
-    name: 'Создание документа',
-    description: 'Создаем документ из пунктов, которые выбрал ИИ и отдаем вам документ.',
-    image: '/step_create_3.svg',
+    name: "Создание документа",
+    description: "Создаем документ из пунктов, которые выбрал ИИ и отдаем вам документ.",
+    image: "/step_create_3.svg",
   },
 ]
 
-
 const audiences = [
   {
-    name: 'Обычным людям',
-    description: 'Проверка договоров аренды, найма, купли-продажи авто или квартиры.',
-    image: '/person_1.svg',
+    name: "Обычным людям",
+    description: "Проверка договоров аренды, найма, купли-продажи авто или квартиры.",
+    image: "/person_1.svg",
   },
   {
-    name: 'Фрилансерам',
-    description: 'Анализ договоров на оказание услуг, чтобы избежать штрафов и неоплат.',
-    image: '/person_2.svg',
+    name: "Фрилансерам",
+    description: "Анализ договоров на оказание услуг, чтобы избежать штрафов и неоплат.",
+    image: "/person_2.svg",
   },
   {
-    name: 'Бизнесу',
-    description: 'Быстрая проверка договоров контрагентов до отправки юристу.',
-    image: '/person_3.svg',
+    name: "Бизнесу",
+    description: "Быстрая проверка договоров контрагентов до отправки юристу.",
+    image: "/person_3.svg",
   },
 ]
 
 const faqs = [
   {
     question: "Можно ли сгенерировать документ с нуля?",
-    answer: "Да. Если у вас нет шаблона, просто опишите задачу своими словами. Сервис подготовит черновик документа в формате DOCX, который можно скачать и доработать под себя.",
+    answer:
+      "Да. Если у вас нет шаблона, просто опишите задачу своими словами. Сервис подготовит черновик документа в формате DOCX, который можно скачать и доработать под себя.",
   },
   {
     question: "Мои документы в безопасности?",
-    answer: "Да. Мы не используем ваши документы для обучения ИИ. После генерации или анализа данные хранятся в вашей истории и доступны только вам.",
+    answer:
+      "Да. Мы не используем ваши документы для обучения ИИ. После генерации или анализа данные хранятся в вашей истории и доступны только вам.",
   },
   {
     question: "Какие форматы поддерживаются?",
-    answer: "Можно отправить описание текстом или загрузить файл в форматах DOCX, TXT, PDF, PNG и JPEG. Если документ создается с нуля, результат можно скачать в формате DOCX.",
+    answer:
+      "Можно отправить описание текстом или загрузить файл в форматах DOCX, TXT, PDF, PNG и JPEG. Если документ создается с нуля, результат можно скачать в формате DOCX.",
   },
   {
     question: "Это заменяет живого юриста?",
-    answer: "Нет. Сервис помогает быстро подготовить черновик и заметить очевидные риски до подписания. Для сложных и нестандартных ситуаций лучше подключать юриста.",
+    answer:
+      "Нет. Сервис помогает быстро подготовить черновик и заметить очевидные риски до подписания. Для сложных и нестандартных ситуаций лучше подключать юриста.",
   },
   {
     question: "Как быстро работает анализ?",
-    answer: "Обычно генерация или проверка занимает от 30 секунд до полутора минут. Точное время зависит от объема документа и сложности задачи.",
+    answer:
+      "Обычно генерация или проверка занимает от 30 секунд до полутора минут. Точное время зависит от объема документа и сложности задачи.",
   },
   {
     question: "Можно ли попробовать бесплатно?",
-    answer: "Да. После запуска бота вы получите 24 кредита. Обычно этого хватает, чтобы создать первый документ или проверить 1-3 договора.",
+    answer:
+      "Да. После запуска бота вы получите 24 кредита. Обычно этого хватает, чтобы создать первый документ или проверить 1-3 договора.",
   },
 ]
 
 export default function Home() {
   const year = new Date().getFullYear()
-  return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* <div
-        className="relative z-30 w-full border-b border-amber-500/25 bg-amber-950/50 px-4 py-3 text-center text-sm text-amber-50/95 backdrop-blur-sm sm:text-base"
-        role="status"
-        aria-live="polite"
-      >
-        <Construction
-          className="inline-block size-4 align-[-0.125em] mr-2 text-amber-400/90 sm:size-[1.125rem]"
-          aria-hidden
-        />
-        Ведутся технические работы. Скоро работа сервиса будет восстановлена.
-      </div> */}
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 relative z-20">
-        <div className="flex pt-3 items-center gap-4">
-          <Image src="/logo.svg" alt="ДоговорCheck" width={260} height={44} priority />
-        </div>
 
+  return (
+    <div className="min-h-screen bg-background">
+      {/* ─── Header ─── */}
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center px-6 py-4">
+          <Image
+            src="/logo.svg"
+            alt="ДоговорCheck"
+            width={220}
+            height={36}
+            priority
+            className="brightness-0"
+          />
+        </div>
       </header>
 
-      {/* Decorative Background Blobs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-accent/15 rounded-full blur-[120px] opacity-50 pointer-events-none -z-10" />
-      <div className="absolute top-[20%] right-[-10%] w-[30rem] h-[30rem] bg-accent/8 rounded-full blur-[100px] opacity-35 pointer-events-none -z-10" />
-
-      {/* Линии по краям контента — на всю высоту */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-6xl pointer-events-none z-0">
-        <div className="document-edge-line absolute left-0 top-0 bottom-0 w-px" />
-        <div className="document-edge-line absolute right-0 top-0 bottom-0 w-px" />
+      {/* ─── Decorative edge lines ─── */}
+      <div className="pointer-events-none fixed inset-y-0 left-1/2 z-0 w-full max-w-6xl -translate-x-1/2">
+        <div className="document-edge-line absolute bottom-0 left-0 top-0 w-px" />
+        <div className="document-edge-line absolute bottom-0 right-0 top-0 w-px" />
       </div>
 
-      <main className="mx-auto max-w-6xl px-6 relative z-10">
-        <section className="section-document pt-16 sm:pt-16 pb-6 flex flex-col items-center sm:pb-16 z-10">
-          <h1 className="font-serif text-balance text-3xl font-semibold text-center tracking-tight sm:text-5xl lg:text-6xl leading-[1.15]">
+      <main className="relative z-10 mx-auto max-w-6xl px-6">
+        {/* ═══════════════════════════════════════════
+            HERO (-mx-6 px-6: фон на ширину колонки, как у section-document)
+        ═══════════════════════════════════════════ */}
+        <section className="relative -mx-6 flex flex-col items-center overflow-hidden border-x border-border/80 bg-[url('/hero_bg.svg')] bg-cover bg-center bg-no-repeat px-6 pt-20 pb-16 text-center sm:pt-28 sm:pb-20">
+          <h1 className="hero-fade-1 font-serif text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.75rem] leading-[1.1]">
             <span className="group relative inline-flex">
               <span
-                className="inline-flex items-center border-b-2 border-white/15 italic transition-all duration-200 hover:border-accent-2/60"
+                className="inline-flex items-center border-b-2 border-foreground/10 italic transition-all duration-200 hover:border-accent/50"
                 title="Искусственный интеллект"
                 aria-label="Искусственный интеллект"
               >
                 ИИ
               </span>
-              <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 translate-y-1 whitespace-nowrap bg-black/95 px-3 py-2 text-base not-italic font-sans font-semibold tracking-normal text-white opacity-0 shadow-lg backdrop-blur-sm transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+              <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-lg bg-foreground px-3 py-2 text-sm not-italic font-sans font-semibold tracking-normal text-background opacity-0 shadow-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                 Искусственный интеллект
               </span>
             </span>{" "}
             проверит договор <br className="hidden sm:block" /> или создаст новый
           </h1>
-          <p className="mt-8 sm:mt-8 font-sans font-semibold text-pretty text-center text-base max-w-3xl leading-tight tracking-tight">
-            Найдёт риски и спорные пункты <br className="hidden sm:block" /> или создаст договор по вашему описанию за 1 минуту
+
+          <p className="hero-fade-2 mt-6 max-w-md text-base sm:text-lg leading-relaxed text-muted">
+            Найдёт риски и спорные пункты <br className="hidden sm:block" /> или создаст
+            договор по вашему описанию <br className="hidden sm:block" /> за 1 минуту
           </p>
 
-          <div className="mt-12 flex flex-wrap items-start items-top gap-4 justify-center">
+          <div className="hero-fade-3 mt-10 flex flex-wrap items-center justify-center gap-3">
             <a
-              className="btn btn-primary text-accent-foreground text-lg px-8 py-4"
+              className="btn btn-primary text-base px-7 py-3.5"
               href="https://t.me/dogovor_check_bot"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/tg.svg" alt="Telegram" width={24} height={24} />
+              <Image src="/tg.svg" alt="Telegram" width={20} height={20} />
               Запустить в Telegram
             </a>
             <a
-              className="btn btn-secondary text-lg px-8 py-4"
+              className="btn btn-secondary text-base px-7 py-3.5"
               href="https://max.ru/id450125033950_1_bot"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/max.svg" alt="Max" width={24} height={24} className="" />
+              <Image src="/max.svg" alt="Max" className="icon-accent" width={20} height={20} />
               Запустить в Max
             </a>
-
-
           </div>
 
-          <div className="pt-5">
-            <div className="text-center font-medium text-muted text-sm text-green-300">
-              Попробовать бесплатно • без регистрации • от 1 минуты
-            </div>
-            <div className="flex flex-row items-center justify-center gap-4 mt-2">
-              <div className="flex items-center">
-                <ChartArea className="size-4 inline-block mr-1" />
-                <a href="https://storage.yandexcloud.net/dogovorcheck-assets/dogovorcheck_example.pdf" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground">
+          <div className="hero-fade-4 mt-7">
+            <p className="mb-3 text-sm tracking-wide text-muted/60">
+              Попробовать бесплатно · без регистрации · от 1 минуты
+            </p>
+            <div className="flex flex-row items-center justify-center gap-5">
+              <a
+                href="https://storage.yandexcloud.net/dogovorcheck-assets/dogovorcheck_example.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm text-muted transition-colors duration-200 hover:text-foreground"
+              >
+                <ChartArea className="size-4" />
+                <span className="border-b border-muted/30 transition-colors duration-200 hover:border-foreground/30">
                   Пример анализа
-                </a>
-              </div>
-
-              <div className="flex items-center">
-                <BookText className="size-4 inline-block mr-1" />
-                <a href="https://storage.yandexcloud.net/dogovorcheck-assets/dogovorcheck_example_gen.docx" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-muted border-b border-muted/50 transition hover:text-foreground">
+                </span>
+              </a>
+              <a
+                href="https://storage.yandexcloud.net/dogovorcheck-assets/dogovorcheck_example_gen.docx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm text-muted transition-colors duration-200 hover:text-foreground"
+              >
+                <BookText className="size-4" />
+                <span className="border-b border-muted/30 transition-colors duration-200 hover:border-foreground/30">
                   Пример генерации
-                </a>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════
+            STATS
+        ═══════════════════════════════════════════ */}
+        <section className="section-document py-12 sm:py-16">
+          <RevealOnScroll>
+            <div className="grid grid-cols-3 divide-x divide-border">
+              <div className="px-4 py-3 text-center sm:px-12">
+                <CountUp
+                  target={125}
+                  suffix="+"
+                  duration={2000}
+                  className="font-serif text-4xl font-normal italic tracking-tight sm:text-6xl"
+                />
+                <p className="mt-2 text-sm font-medium text-muted sm:text-base">
+                  проверено договоров
+                </p>
+              </div>
+              <div className="px-4 py-3 text-center sm:px-12">
+                <CountUp
+                  target={215}
+                  suffix="+"
+                  duration={2000}
+                  delay={100}
+                  className="font-serif text-4xl font-normal italic tracking-tight sm:text-6xl"
+                />
+                <p className="mt-2 text-sm font-medium text-muted sm:text-base">
+                  сэкономлено часов
+                </p>
+              </div>
+              <div className="px-4 py-3 text-center sm:px-12">
+                <CountUp
+                  target={685}
+                  suffix="+"
+                  duration={2000}
+                  delay={120}
+                  className="font-serif text-4xl font-normal italic tracking-tight sm:text-6xl"
+                />
+                <p className="mt-2 text-sm font-medium text-muted sm:text-base">
+                  найдено опасных пунктов
+                </p>
               </div>
             </div>
-
-          </div>
-
+          </RevealOnScroll>
         </section>
 
-        {/* Stats block */}
-        <section className="section-document pt-6 sm:pt-12 pb-6 sm:pb-12 bg-accent/5">
-          <div className="grid grid-cols-1 sm:grid-cols-3 items-center justify-center gap-4 sm:gap-6">
-            <div className="text-center">
-              <CountUp
-                target={125}
-                suffix="+"
-                duration={2000}
-                className="text-5xl sm:text-7xl font-serif text-balance font-normal italic tracking-tight"
-              />
-              <p className="text-muted font-medium text-base sm:text-base mt-1">проверено договоров</p>
-            </div>
-            <div className="text-center">
-              <CountUp
-                target={215}
-                suffix="+"
-                duration={2000}
-                delay={100}
-                className="text-5xl sm:text-7xl font-normal italic text-balance font-serif tracking-tight"
-              />
-              <p className="text-muted font-medium text-base sm:text-base mt-1">сэкономлено часов</p>
-            </div>
-            <div className="text-center">
-              <CountUp
-                target={685}
-                suffix="+"
-                duration={2000}
-                delay={120}
-                className="text-5xl sm:text-7xl font-normal italic text-balance font-serif tracking-tight"
-              />
-              <p className="text-muted font-medium text-base sm:text-base mt-1">найдено опасных пунктов</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Sticky Layout: What AI checks */}
-        <section className="section-document relative pt-6 sm:pt-16 pb-6 sm:pb-16">
-          <div className="flex flex-col items-center text-center">
-            {/* <h2 className="font-serif text-balance text-2xl md:text-5xl font-semibold tracking-tight mb-16">
-              Что умеет?
-            </h2> */}
-            <div className="lg:w-4/6 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2">
-              {checks.map((check) => (
-                <div key={check.name} className="p-4 sm:p-8 flex flex-col bg-card/80 rounded-2xl items-start text-left shadow-lg">
-                  <div className="mb-6">
-                    <check.icon className="size-10 text-accent-2" aria-hidden="true" />
-                  </div>
-
-                  <h3 className="text-lg font-serif sm:text-xl text-se font-semibold mb-3 tracking-tight leading-tight">{check.name}</h3>
-                  <p className="text-muted text-base font-medium leading-tight">{check.description}</p>
-                </div>
+        {/* ═══════════════════════════════════════════
+            WHAT AI CHECKS
+        ═══════════════════════════════════════════ */}
+        <section className="section-document py-16 sm:py-24">
+          <div className="flex flex-col items-center">
+            <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 lg:w-4/6">
+              {checks.map((check, i) => (
+                <RevealOnScroll
+                  key={check.name}
+                  delay={i * 80}
+                  className="flex flex-col rounded-2xl bg-white p-6 ring-1 ring-border transition-shadow duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] sm:p-8"
+                >
+                  <check.icon className="mb-5 size-8 text-accent" aria-hidden />
+                  <h3 className="mb-2.5 font-serif text-lg font-semibold leading-tight tracking-tight">
+                    {check.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted">{check.description}</p>
+                </RevealOnScroll>
               ))}
             </div>
           </div>
         </section>
 
-        {/* How it works - Timeline */}
-        <section className="section-document pt-6 sm:pt-16 pb-6 sm:pb-16">
-          <div className="text-center mb-20 relative z-10">
-            <h2 className="font-serif text-balance text-3xl font-semibold tracking-tight sm:text-5xl pb-2">
+        {/* ═══════════════════════════════════════════
+            HOW ANALYSIS WORKS
+        ═══════════════════════════════════════════ */}
+        <section className="section-document bg-stone-100/60 py-16 sm:py-24">
+          <RevealOnScroll className="mb-14 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
               Как работает анализ?
             </h2>
-            <p className="mt-5 text-base font-semibold leading-tight tracking-tight text-muted max-w-2xl mx-auto">
+            <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-muted">
               Три простых шага для вашей безопасности.
             </p>
-          </div>
-          <div className="relative max-w-5xl mx-auto px-4 sm:px-0">
+          </RevealOnScroll>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-              {steps.map((step) => (
-                <div key={step.name} className="relative flex flex-col items-center text-center z-10 group">
-                  <div className="flex flex-col items-center">
-
-                    <div className="p-3 mb-5 relative">
-                      <Image src={step.image} alt={step.name} width={120} height={120} className="opacity-95" />
-                    </div>
-                    <span className="text-xs font-semibold text-muted tracking-widest uppercase">
-                      Шаг {step.step}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-semibold mb-3 tracking-tight text-foreground/95">{step.name}</h3>
-                    <p className="text-muted text-sm leading-tight tracking-tight font-semibold max-w-[280px] text-center">{step.description}</p>
-                  </div>
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+            {steps.map((step, i) => (
+              <RevealOnScroll
+                key={step.name}
+                delay={i * 100}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="mb-5">
+                  <Image src={step.image} alt={step.name} width={96} height={96} />
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Features Gen */}
-        <section className="section-document px-6 sm:px-10 md:px-12 pt-6 sm:pt-16 pb-6 sm:pb-16 bg-accent/5">
-          <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-4">
-            {features.map((feature) => (
-              <div key={feature.name} className="flex flex-col">
-                <div className="flex flex-col gap-4">
-                  <feature.icon aria-hidden="true" className="size-7 text-white" />
-                  <h3 className="text-base font-semibold leading-tight">{feature.name}</h3>
-                </div>
-                <p className="mt-2 text-sm font-semibold leading-tight text-muted">{feature.description}</p>
-              </div>
+                <span className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent/60">
+                  Шаг {step.step}
+                </span>
+                <h3 className="mb-3 text-xl font-semibold tracking-tight">{step.name}</h3>
+                <p className="max-w-[240px] text-sm leading-relaxed text-muted">
+                  {step.description}
+                </p>
+              </RevealOnScroll>
             ))}
           </div>
         </section>
 
-        <section className="section-document pt-6 sm:pt-16 pb-6 sm:pb-16">
-          <div className="text-center mb-20 relative z-10">
-            <h2 className="font-serif text-balance text-3xl font-semibold tracking-tight sm:text-5xl pb-2">
+        {/* ═══════════════════════════════════════════
+            ANALYSIS FEATURES
+        ═══════════════════════════════════════════ */}
+        <section className="section-document px-4 py-12 sm:px-10 sm:py-16">
+          <RevealOnScroll>
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+              {features.map((feature) => (
+                <div key={feature.name} className="flex flex-col gap-3">
+                  <feature.icon aria-hidden className="size-6 text-accent" />
+                  <h3 className="text-base font-semibold leading-tight tracking-tight">
+                    {feature.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </RevealOnScroll>
+        </section>
+
+        {/* ═══════════════════════════════════════════
+            HOW CONTRACT CREATED
+        ═══════════════════════════════════════════ */}
+        <section className="section-document py-16 sm:py-24">
+          <RevealOnScroll className="mb-14 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
               Как создается договор?
             </h2>
-            <p className="mt-5 text-base font-semibold leading-tight tracking-tight text-muted max-w-2xl mx-auto">
-              ИИ создаст {" "}
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              ИИ создаст{" "}
               <span className="group relative inline-flex">
                 <span
-                  className="inline-flex items-center border-b-2 border-white/15 italic transition-all duration-200 hover:border-accent-2/60"
+                  className="inline-flex items-center border-b border-muted/40 italic transition-all duration-200 hover:border-accent/50"
                   title="Паритет (от лат. paritas — равенство) — это равноправие, равноценность, равенство сторон или показателей в чем-либо."
                   aria-label="Паритет (от лат. paritas — равенство) — это равноправие, равноценность, равенство сторон или показателей в чем-либо."
                 >
                   паритетный
                 </span>
-                <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-3 w-max max-w-[min(16rem,calc(100vw-2rem))] -translate-x-1/2 translate-y-1 bg-black/95 px-3 py-2 text-left text-sm leading-snug not-italic font-sans font-semibold tracking-normal text-white opacity-0 shadow-lg backdrop-blur-sm transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
-                  Паритет (от лат. paritas — равенство) — это равноправие, равноценность, равенство сторон или показателей в чем-либо.
+                <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-max max-w-[min(16rem,calc(100vw-2rem))] -translate-x-1/2 translate-y-1 rounded-lg bg-foreground px-3 py-2 text-left text-sm not-italic font-sans font-medium leading-snug tracking-normal text-background opacity-0 shadow-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                  Паритет (от лат. paritas — равенство) — это равноправие, равноценность,
+                  равенство сторон или показателей в чем-либо.
                 </span>
-              </span>{" "} договор по вашему описанию
+              </span>{" "}
+              договор по вашему описанию
             </p>
+          </RevealOnScroll>
+
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+            {steps_create.map((step, i) => (
+              <RevealOnScroll
+                key={step.name}
+                delay={i * 100}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="mb-5">
+                  <Image src={step.image} alt={step.name} width={96} height={96} />
+                </div>
+                <span className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent/60">
+                  Шаг {step.step}
+                </span>
+                <h3 className="mb-3 text-xl font-semibold tracking-tight">{step.name}</h3>
+                <p className="max-w-[240px] text-sm leading-relaxed text-muted">
+                  {step.description}
+                </p>
+              </RevealOnScroll>
+            ))}
           </div>
-          <div className="relative max-w-5xl mx-auto px-4 sm:px-0">
+        </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-              {steps_create.map((step) => (
-                <div key={step.name} className="relative flex flex-col items-center text-center z-10 group">
-                  <div className="flex flex-col items-center">
-
-                    <div className="p-3 mb-5 relative">
-                      <Image src={step.image} alt={step.name} width={120} height={120} className="opacity-95" />
-                    </div>
-                    <span className="text-xs font-semibold text-muted tracking-widest uppercase">
-                      Шаг {step.step}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-semibold mb-3 tracking-tight text-foreground/95">{step.name}</h3>
-                    <p className="text-muted text-sm leading-tight tracking-tight font-semibold max-w-[280px] text-center">{step.description}</p>
-                  </div>
+        {/* ═══════════════════════════════════════════
+            CREATE FEATURES
+        ═══════════════════════════════════════════ */}
+        <section className="section-document bg-stone-100/60 px-4 py-12 sm:px-10 sm:py-16">
+          <RevealOnScroll>
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+              {features_create.map((feature) => (
+                <div key={feature.name} className="flex flex-col gap-3">
+                  <feature.icon aria-hidden className="size-6 text-accent" />
+                  <h3 className="text-base font-semibold leading-tight tracking-tight">
+                    {feature.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted">{feature.description}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </RevealOnScroll>
         </section>
 
-        {/* Features Gen */}
-        <section className="section-document px-6 sm:px-10 md:px-12 pt-6 sm:pt-16 pb-6 sm:pb-16 bg-accent/5">
-          <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-4">
-            {features_create.map((feature) => (
-              <div key={feature.name} className="flex flex-col">
-                <div className="flex flex-col gap-4">
-                  <feature.icon aria-hidden="true" className="size-7 text-white" />
-                  <h3 className="text-base font-semibold leading-tight">{feature.name}</h3>
-                </div>
-                <p className="mt-2 text-sm font-semibold leading-tight text-muted">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Who is it for */}
-        <section className="section-document  pt-6 sm:pt-16 pb-6 sm:pb-16 ">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-balance text-3xl font-semibold tracking-tight sm:text-5xl text-gradient pb-2">
+        {/* ═══════════════════════════════════════════
+            WHO IS IT FOR
+        ═══════════════════════════════════════════ */}
+        <section className="section-document py-16 sm:py-24">
+          <RevealOnScroll className="mb-12 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
               Для кого этот сервис
             </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {audiences.map((audience) => (
-              <div key={audience.name} className="p-8 flex flex-col items-start  min-h-[240px]">
-                <div>
-                  <div className="pb-6">
-                    <Image src={audience.image} alt={audience.name} width={220} height={220} />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-4 tracking-tight">{audience.name}</h3>
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {audiences.map((audience, i) => (
+              <RevealOnScroll
+                key={audience.name}
+                delay={i * 80}
+                className="flex flex-col rounded-2xl bg-white p-8 ring-1 ring-border transition-shadow duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)]"
+              >
+                <div className="mb-6">
+                  <Image src={audience.image} alt={audience.name} width={180} height={180} />
                 </div>
-                <p className="text-muted text-base font-semibold leading-tight">{audience.description}</p>
-              </div>
+                <h3 className="mb-3 text-xl font-semibold tracking-tight">{audience.name}</h3>
+                <p className="text-sm leading-relaxed text-muted">{audience.description}</p>
+              </RevealOnScroll>
             ))}
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="section-document max-w-full mx-auto pt-6 sm:pt-16 pb-6 sm:pb-16">
-          <div className="text-center">
-            <h2 className="font-serif text-balance text-3xl font-semibold tracking-tight sm:text-5xl text-gradient pb-2">
+        {/* ═══════════════════════════════════════════
+            FAQ
+        ═══════════════════════════════════════════ */}
+        <section className="section-document bg-stone-100/60 py-16 sm:py-24">
+          <RevealOnScroll className="mb-10 text-center sm:mb-12">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
               Частые вопросы
             </h2>
-          </div>
-          <div className="glass-panel mt-6 sm:mt-12 px-6 pb-6 shadow-lg">
-            <dl className="space-y-6 divide-y divide-white/10">
-              {faqs.map((faq, index) => (
-                <div key={index} className={index === 0 ? "pt-0" : ""}>
-                  <FAQItem faq={faq} />
-                </div>
-              ))}
-            </dl>
+          </RevealOnScroll>
 
-          </div>
+          <RevealOnScroll
+            delay={120}
+            className="mx-auto max-w-3xl divide-y divide-border/60 rounded-2xl bg-white px-6 ring-1 ring-border sm:px-8"
+          >
+            {faqs.map((faq, index) => (
+              <FAQItem key={index} faq={faq} />
+            ))}
+          </RevealOnScroll>
         </section>
 
-        <section className="section-document pt-6 sm:pt-16 pb-6 sm:pb-16 bg-accent/5">
-          <div className="flex justify-center md:flex-row flex-col items-center gap-4">
-            <a
-              className="btn btn-secondary text-accent-foreground text-lg px-8 py-4"
-              href="https://t.me/dogovor_check_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src="/tg.svg" alt="Telegram" width={24} height={24} />
-              Открыть в Telegram
-            </a>
-            <a
-              className="btn btn-secondary text-accent-foreground text-lg px-8 py-4"
-              href="https://max.ru/id450125033950_1_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src="/max.svg" alt="Max" width={24} height={24} className="" />
-              Открыть в Max
-            </a>
-          </div>
+        {/* ═══════════════════════════════════════════
+            BOTTOM CTA
+        ═══════════════════════════════════════════ */}
+        <section className="section-document py-16 sm:py-24">
+          <RevealOnScroll className="flex flex-col items-center text-center">
+            <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
+              Попробуйте бесплатно прямо сейчас
+            </h2>
+            <p className="mt-4 text-base text-muted max-w-xs">
+              24 кредита в подарок после запуска — без регистрации.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a
+                className="btn btn-primary text-base px-7 py-3.5"
+                href="https://t.me/dogovor_check_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src="/tg.svg" alt="Telegram" width={20} height={20} />
+                Открыть в Telegram
+              </a>
+              <a
+                className="btn btn-secondary text-base px-7 py-3.5"
+                href="https://max.ru/id450125033950_1_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src="/max.svg" alt="Max" width={20} height={20} />
+                Открыть в Max
+              </a>
+            </div>
+          </RevealOnScroll>
         </section>
       </main>
 
-      <footer className="border-t border-white/5 relative z-20 pt-2 sm:pt-12 pb-2 sm:pb-12 bg-background/50 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 md:py-1 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted opacity-50">
+      {/* ─── Footer ─── */}
+      <footer className="border-t border-border/60 bg-background py-8 sm:py-12">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted/60">
             © {year} Договор<span className="italic">Чек</span>. Все права защищены.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-5">
             <a
-              className="text-sm text-muted hover:text-foreground hover:underline transition"
+              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
               href="mailto:admin@dogovorcheck.ru"
               target="_blank"
               rel="noopener noreferrer"
@@ -525,12 +579,12 @@ export default function Home() {
             </a>
             <Link
               href="/privacy"
-              className="text-sm text-muted hover:text-foreground hover:underline transition"
+              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
             >
               Политика конфиденциальности
             </Link>
             <a
-              className="text-sm text-muted hover:text-foreground hover:underline transition"
+              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
               href="https://t.me/dogovor_check_bot"
               target="_blank"
               rel="noopener noreferrer"
@@ -538,7 +592,7 @@ export default function Home() {
               Telegram-бот
             </a>
             <a
-              className="text-sm text-muted hover:text-foreground hover:underline transition"
+              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
               href="https://max.ru/id450125033950_1_bot"
               target="_blank"
               rel="noopener noreferrer"
@@ -549,5 +603,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  );
+  )
 }
