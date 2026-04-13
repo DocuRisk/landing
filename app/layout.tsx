@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CookieConsent from "./components/CookieConsent";
+import Footer from "./components/Footer";
 import { Literata, Onest } from "next/font/google";
 import "./globals.css";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${onest.className} antialiased text-foreground`}
       >
         {children}
+        <Footer />
         <CookieConsent />
         <script
           dangerouslySetInnerHTML={{

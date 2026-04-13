@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import {
   MessageCircleQuestion,
   ScanSearch,
@@ -22,7 +21,7 @@ const features = [
   {
     name: "Распознавание документов",
     description:
-      "Загружайте PDF, DOCX или изображения — сервис автоматически распознает текст.",
+      "Загружайте PDF, Word или изображения — сервис автоматически распознает текст.",
     icon: ScanSearch,
   },
   {
@@ -48,24 +47,24 @@ const features_create = [
   {
     name: "Российская ИИ-модель",
     description:
-      "ИИ генерирует договор на основе вашего описания и создает договор. Используется российская ИИ-модель, которая лучше всего работает в России.",
+      "ИИ генерирует договор на основе вашего описания и создает договор. Используем ИИ-модель от Яндекса, которая лучше всего работает в России и на русском языке.",
     icon: Bot,
   },
   {
     name: "Паритетный договор",
-    description: "ИИ генерирует договор который защищает права и интересы обоих сторон.",
+    description: "ИИ генерирует договор, который защищает права и интересы обоих сторон.",
     icon: Scale,
   },
   {
     name: "Договор под свою задачу",
     description:
-      "ИИ генерирует договор под вашу задачу, где вы можете изменить пункты договора под себя.",
+      "ИИ генерирует договор по вашему описанию, где вы можете изменить пункты договора под себя.",
     icon: SlidersHorizontal,
   },
   {
     name: "Редактирование договора",
     description:
-      "Генерируем договор в формате Word, который вы можете редактировать под себя.",
+      "Генерируем договор в формате Word, который вы можете продолжить редактировать сами.",
     icon: SquarePen,
   },
 ]
@@ -119,7 +118,7 @@ const steps_create = [
     step: 1,
     name: "Описание",
     description:
-      "Вы отправляете описание договора, которое хотите создать, например: «Договор аренды квартиры».",
+      "Вы отправляете описание договора, который хотите создать, например: «Договор аренды квартиры».",
     image: "/step_create_1.svg",
   },
   {
@@ -131,7 +130,7 @@ const steps_create = [
   {
     step: 3,
     name: "Создание документа",
-    description: "Создаем документ из пунктов, которые выбрал ИИ и отдаем вам документ.",
+    description: "Создаем документ из пунктов, которые выбрал ИИ, и отдаем вам документ.",
     image: "/step_create_3.svg",
   },
 ]
@@ -158,7 +157,7 @@ const faqs = [
   {
     question: "Можно ли сгенерировать документ с нуля?",
     answer:
-      "Да. Если у вас нет шаблона, просто опишите задачу своими словами. Сервис подготовит черновик документа в формате DOCX, который можно скачать и доработать под себя.",
+      "Да. Если у вас нет шаблона, просто опишите задачу своими словами. Сервис подготовит черновик документа в формате Word, который можно скачать и доработать под себя.",
   },
   {
     question: "Мои документы в безопасности?",
@@ -168,7 +167,7 @@ const faqs = [
   {
     question: "Какие форматы поддерживаются?",
     answer:
-      "Можно отправить описание текстом или загрузить файл в форматах DOCX, TXT, PDF, PNG и JPEG. Если документ создается с нуля, результат можно скачать в формате DOCX.",
+      "Можно отправить описание текстом или загрузить файл в форматах Word, TXT, PDF, PNG и JPEG. Если документ создается с нуля, результат можно скачать в формате Word.",
   },
   {
     question: "Это заменяет живого юриста?",
@@ -188,39 +187,42 @@ const faqs = [
 ]
 
 export default function Home() {
-  const year = new Date().getFullYear()
-
   return (
     <div className="min-h-screen bg-background">
       {/* ─── Header ─── */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-6 py-4">
+        <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-3 px-6 py-4 sm:gap-4">
           <Image
             src="/logo.svg"
             alt="ДоговорCheck"
             width={220}
             height={36}
             priority
-            className="brightness-0"
+            className="min-w-0 shrink brightness-0 max-h-7 w-auto max-w-[min(11rem,46vw)] sm:max-w-none sm:max-h-9"
           />
-          <nav className="flex shrink-0 items-center gap-3 sm:gap-5" aria-label="Запуск бота">
+          <nav
+            className="flex shrink-0 flex-nowrap items-center gap-1.5 sm:gap-5"
+            aria-label="Запуск бота"
+          >
             <a
-              className="header-bot-link flex items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent"
+              className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
               href="https://t.me/dogovor_check_bot"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Открыть Telegram-бота"
             >
-              <Image src="/tg_black.svg" alt="" className="header-bot-icon" width={20} height={20} />
-              Telegram-бот
+              <Image src="/tg_black.svg" alt="" className="header-bot-icon shrink-0" width={20} height={20} />
+              <span className="hidden sm:inline">Telegram-бот</span>
             </a>
             <a
-              className="header-bot-link flex items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent"
+              className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
               href="https://max.ru/id450125033950_1_bot"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Открыть Max-бота"
             >
-              <Image src="/max_black.svg" alt="" className="header-bot-icon" width={20} height={20} />
-              Max-бот
+              <Image src="/max_black.svg" alt="" className="header-bot-icon shrink-0" width={20} height={20} />
+              <span className="hidden sm:inline">Max-бот</span>
             </a>
           </nav>
         </div>
@@ -564,7 +566,7 @@ export default function Home() {
                   12 кредитов
                 </span>
                 <span className="font-medium text-accent">24 кредита</span>
-                {' '}для проверки или генерации договоро в боте.
+                {' '}для проверки или генерации договоров в боте.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -590,47 +592,6 @@ export default function Home() {
           </RevealOnScroll>
         </section>
       </main>
-
-      {/* ─── Footer ─── */}
-      <footer className="border-t border-border/60 bg-background py-8 sm:py-12">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted/60">
-            © {year} <span className="font-serif font-semibold">Договор<span className="italic">Чек</span></span>. Все права защищены.
-          </p>
-          <div className="flex flex-wrap gap-5">
-            <a
-              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
-              href="mailto:admin@dogovorcheck.ru"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Поддержка
-            </a>
-            <Link
-              href="/privacy"
-              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
-            >
-              Политика конфиденциальности
-            </Link>
-            <a
-              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
-              href="https://t.me/dogovor_check_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Telegram-бот
-            </a>
-            <a
-              className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
-              href="https://max.ru/id450125033950_1_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Max-бот
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

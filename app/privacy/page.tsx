@@ -9,10 +9,44 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 relative z-20">
-        <Link href="/" className="flex pt-3 items-center gap-4">
-          <Image src="/logo.svg" alt="ДоговорCheck" width={260} height={44} priority />
-        </Link>
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-3 px-6 py-4 sm:gap-4">
+          <Link href="/" className="min-w-0 shrink">
+            <Image
+              src="/logo.svg"
+              alt="ДоговорCheck"
+              width={220}
+              height={36}
+              priority
+              className="min-w-0 shrink brightness-0 max-h-7 w-auto max-w-[min(11rem,46vw)] sm:max-w-none sm:max-h-9"
+            />
+          </Link>
+          <nav
+            className="flex shrink-0 flex-nowrap items-center gap-1.5 sm:gap-5"
+            aria-label="Запуск бота"
+          >
+            <a
+              className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
+              href="https://t.me/dogovor_check_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Открыть Telegram-бота"
+            >
+              <Image src="/tg_black.svg" alt="" className="header-bot-icon shrink-0" width={20} height={20} />
+              <span className="hidden sm:inline">Telegram-бот</span>
+            </a>
+            <a
+              className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
+              href="https://max.ru/id450125033950_1_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Открыть Max-бота"
+            >
+              <Image src="/max_black.svg" alt="" className="header-bot-icon shrink-0" width={20} height={20} />
+              <span className="hidden sm:inline">Max-бот</span>
+            </a>
+          </nav>
+        </div>
       </header>
 
       <div className="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-accent/15 rounded-full blur-[120px] opacity-50 pointer-events-none -z-10" />
@@ -212,30 +246,6 @@ export default function PrivacyPage() {
           </div>
         </article>
       </main>
-
-      <footer className="border-t border-white/5 relative z-20 mt-16 bg-background/50 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted">
-            © {new Date().getFullYear()} Договор<span className="italic">Чек</span>. Все права защищены.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="text-sm text-muted hover:text-foreground hover:underline transition"
-            >
-              Политика конфиденциальности
-            </Link>
-            <a
-              className="text-sm text-muted hover:text-foreground hover:underline transition"
-              href="https://t.me/dogovor_check_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Telegram-бот
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
