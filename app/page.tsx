@@ -12,6 +12,9 @@ import {
   Bot,
   SlidersHorizontal,
   SquarePen,
+  Zap,
+  TrendingUp,
+  Crown,
 } from "lucide-react"
 import FAQItem from "./components/FAQItem"
 import CountUp from "./components/CountUp"
@@ -150,6 +153,30 @@ const audiences = [
     name: "Бизнесу",
     description: "Быстрая проверка договоров контрагентов до отправки юристу.",
     image: "/person_3.svg",
+  },
+]
+
+const packages = [
+  {
+    id: "start",
+    name: "Старт",
+    price: 990,
+    credits: 55,
+    icon: Zap,
+  },
+  {
+    id: "business",
+    name: "Бизнес",
+    price: 2990,
+    credits: 180,
+    icon: TrendingUp,
+  },
+  {
+    id: "pro",
+    name: "Профи",
+    price: 5990,
+    credits: 400,
+    icon: Crown,
   },
 ]
 
@@ -591,6 +618,61 @@ export default function Home() {
             </div>
           </RevealOnScroll>
         </section>
+
+        {/* ═══════════════════════════════════════════
+            TOKEN PACKAGES
+        ═══════════════════════════════════════════ */}
+        <section className="section-document bg-stone-100/60 py-16 sm:py-24">
+          <RevealOnScroll className="mb-12 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
+              Пакеты кредитов
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              Чем больше пакет — тем выгоднее каждый кредит
+            </p>
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+            {packages.map((pkg, i) => {
+              const pricePerCredit = (pkg.price / pkg.credits).toLocaleString("ru-RU", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+              const Icon = pkg.icon
+              return (
+                <RevealOnScroll
+                  key={pkg.id}
+                  delay={i * 80}
+                  className="flex flex-col rounded-2xl bg-white p-7 ring-1 ring-border transition-shadow duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] sm:p-8"
+                >
+                  <div className="mb-5 flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/8">
+                      <Icon className="size-5 text-accent" aria-hidden />
+                    </div>
+                    <h3 className="font-semibold tracking-tight">{pkg.name}</h3>
+                  </div>
+
+                  <div className="mb-6">
+                    <span className="font-serif text-5xl font-normal italic tracking-tight">
+                      {pkg.credits}
+                    </span>
+                    <span className="ml-2 text-base text-muted">кредитов</span>
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between border-t border-border/60 pt-5">
+                    <span className="font-serif text-2xl font-semibold tracking-tight">
+                      {pkg.price.toLocaleString("ru-RU")} ₽
+                    </span>
+                    <span className="rounded-full bg-accent/8 px-3 py-1 text-xs font-semibold text-accent ring-1 ring-accent/15">
+                      {pricePerCredit}&thinsp;₽&thinsp;/&thinsp;кредит
+                    </span>
+                  </div>
+                </RevealOnScroll>
+              )
+            })}
+          </div>
+        </section>
+
       </main>
     </div>
   )

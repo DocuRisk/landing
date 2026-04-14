@@ -20,6 +20,10 @@ export default {
           "serif",
         ],
       },
+      opacity: {
+        "8": "0.08",
+        "15": "0.15",
+      },
       colors: {
         background: "rgb(var(--background) / <alpha-value>)",
         foreground: "rgb(var(--foreground) / <alpha-value>)",
