@@ -1,45 +1,79 @@
-# ДоговорCheck — лендинг
+# ДоговорCheck
 
-Статический сайт для сервиса **[ДоговорCheck](https://dogovorcheck.ru/)** (проверка и генерация договоров с помощью ИИ). Собирается из [Next.js](https://nextjs.org) в режиме [`output: "export"`](https://nextjs.org/docs/app/building-your-application/deploying/static-exports); готовые файлы лежат в каталоге `out/` и отдаются **как статический сайт из [Yandex Object Storage](https://yandex.cloud/ru/docs/storage/concepts/hosting)** (без Node.js на сервере).
+Исходный код лендинга сервиса **[ДоговорCheck](https://dogovorcheck.ru/)**.  
+Сайт рассказывает о продукте для проверки и генерации договоров с помощью ИИ.
 
-## Локально
+Проект собран на [Next.js](https://nextjs.org) и экспортируется как полностью статический сайт.  
+Готовая сборка публикуется в **Yandex Object Storage** и работает без Node.js на сервере.
+
+## Что в репозитории
+
+- Лендинг для публичного сайта проекта `dogovorcheck.ru`
+- Статическая сборка через `output: "export"`
+- Деплой в S3-совместимое хранилище через `npm run deploy`
+
+## Локальный запуск
+
+Установите зависимости и запустите dev-сервер:
 
 ```bash
-npm ci
 npm run dev
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000).
+После запуска сайт будет доступен по адресу [http://localhost:3000](http://localhost:3000).
 
-## Сборка
+## Production-сборка
 
 ```bash
 npm run build
 ```
 
-Результат — каталог `out/`. Проверка доступности после выкладки: [`/health.json`](public/health.json) → `{"status":"ok"}`.
+Результат сборки попадает в каталог `out/`.
+
+Для быстрой проверки после публикации можно использовать файл [`public/health.json`](public/health.json):  
+ожидаемый ответ по пути `/health.json`:
+
+```json
+{"status":"ok"}
+```
 
 ## Деплой в Yandex Object Storage
 
-1. Скопируйте [`.env.example`](.env.example) в `.env` и заполните ключи доступа к бакету:
-   - `KEY_ID` — идентификатор ключа сервисного аккаунта;
-   - `SECRET_KEY` — секрет ключа.
+### 1. Подготовьте переменные окружения
 
-2. Для **Yandex Object Storage** в том же `.env` задайте endpoint (S3-совместимый API), например:
+Скопируйте [`.env.example`](.env.example) в `.env` и укажите значения:
 
-   ```bash
-   S3_ENDPOINT_URL=https://storage.yandexcloud.net
-   ```
+```bash
+KEY_ID=your_access_key_id
+SECRET_KEY=your_secret_key
+```
 
-   Регион при необходимости: `AWS_REGION=ru-central1`.
+Для деплоя в **Yandex Object Storage** также укажите S3 endpoint:
 
-3. Соберите сайт и загрузите содержимое `out/` в бакет (скрипт сначала очищает префикс, затем заливает файлы):
+```bash
+S3_ENDPOINT_URL=https://storage.yandexcloud.net
+```
 
-   ```bash
-   npm run build
-   npm run deploy -- '<BUCKET URL>'
-   ```
+При необходимости можно явно задать регион:
 
-   Вместо `<BUCKET URL>` укажите URL вашего бакета в поддерживаемом формате, например `https://storage.yandexcloud.net/имя-бакета` или `s3://имя-бакета` (при `S3_ENDPOINT_URL` в `.env`). Подробнее о вариантах URL см. сообщения об ошибке в [`scripts/deploy.mjs`](scripts/deploy.mjs) или запустите деплой без аргумента — скрипт выведет подсказку.
+```bash
+AWS_REGION=ru-central1
+```
 
-В консоли Yandex Cloud для бакета включите **хостинг статического сайта** и укажите индексную страницу (обычно `index.html`), если требуется открывать сайт по публичному URL хранилища или через подключённый домен.
+### 2. Выполните сборку и деплой
+
+```bash
+npm run build
+npm run deploy -- '<BUCKET URL>'
+```
+
+Вместо `<BUCKET URL>` укажите адрес бакета, например:
+
+- `https://storage.yandexcloud.net/your-bucket`
+- `s3://your-bucket`
+
+Скрипт деплоя очищает целевой префикс и затем загружает содержимое каталога `out/`.
+
+### 3. Включите статический хостинг
+
+В настройках бакета Yandex Cloud включите **статический хостинг** и укажите индексную страницу `index.html`, если сайт должен открываться по публичному URL бакета или через подключённый домен.
