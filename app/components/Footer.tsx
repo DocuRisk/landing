@@ -44,6 +44,14 @@ export default function Footer() {
           >
             Max-бот
           </a>
+          <a
+            className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
+            href="https://github.com/DocuRisk"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
         </div>
       </div>
     </footer>
