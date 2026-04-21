@@ -13,6 +13,11 @@
   --accent: 109 40 217;
   --accent-2: 124 58 237;
   --accent-foreground: 255 255 255;
+
+  /* Strong ease-out for UI interactions (stronger than CSS default) */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  /* Strong ease-in-out for on-screen movement */
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 html {
@@ -30,7 +35,7 @@ body {
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -43,23 +48,35 @@ body {
   to   { opacity: 1; }
 }
 
-.hero-fade-1 { animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0ms   both; }
-.hero-fade-2 { animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 160ms  both; }
-.hero-fade-3 { animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 320ms  both; }
-.hero-fade-4 { animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 480ms  both; }
+.hero-fade-1 { animation: fadeUp 0.65s var(--ease-out-strong) 0ms    both; }
+.hero-fade-2 { animation: fadeUp 0.65s var(--ease-out-strong) 100ms  both; }
+.hero-fade-3 { animation: fadeUp 0.65s var(--ease-out-strong) 220ms  both; }
+.hero-fade-4 { animation: fadeUp 0.65s var(--ease-out-strong) 320ms  both; }
 
 /* ─── Scroll reveal (triggered by JS) ─── */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(14px);
   transition:
-    opacity  0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity  0.55s var(--ease-out-strong),
+    transform 0.55s var(--ease-out-strong);
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-fade-1,
+  .hero-fade-2,
+  .hero-fade-3,
+  .hero-fade-4 {
+    transform: none;
+    animation: fadeIn 0.3s ease both;
+  }
+  .reveal { opacity: 1; }
 }
 
 .text-spacing-tight {
@@ -78,8 +95,14 @@ body {
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40 cursor-pointer select-none;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/40 cursor-pointer select-none;
     letter-spacing: -0.02em;
+    transition:
+      transform 160ms var(--ease-out-strong),
+      box-shadow 200ms ease-out,
+      background-color 200ms ease-out,
+      color 200ms ease-out,
+      border-color 200ms ease-out;
   }
 
   .btn-primary {
@@ -94,8 +117,31 @@ body {
     @apply inline-flex items-center rounded-full bg-accent/8 px-3 py-1 text-xs font-medium text-accent ring-1 ring-accent/15;
   }
 
+  /* Interactive surface card: subtle lift + border tint on hover */
   .card {
-    @apply rounded-2xl bg-white ring-1 ring-border transition-all duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)];
+    @apply rounded-2xl bg-white ring-1 ring-border;
+    transition:
+      transform 280ms var(--ease-out-strong),
+      box-shadow 280ms var(--ease-out-strong),
+      border-color 280ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 10px 32px -12px rgba(28, 25, 23, 0.12),
+        0 0 0 1px rgb(var(--accent) / 0.14);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: box-shadow 200ms ease;
+    }
+    .card:hover {
+      transform: none;
+    }
   }
 
   .glass-panel {
@@ -118,5 +164,31 @@ body {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     border-top: 1px solid rgb(var(--border) / 0.7);
+  }
+
+  /* Origin-aware tooltip: scales in from its trigger.
+     Note: transform composes translateX(-50%) + scale so it doesn't
+     conflict with Tailwind transform utilities — don't add them on top. */
+  .tooltip-pop {
+    transform: translateX(-50%) scale(0.96);
+    opacity: 0;
+    transition:
+      transform 180ms var(--ease-out-strong),
+      opacity 180ms var(--ease-out-strong);
+    transform-origin: top;
+  }
+
+  .group:hover .tooltip-pop,
+  .group:focus-within .tooltip-pop {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+
+  /* Step number chip */
+  .step-chip {
+    @apply inline-flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-[0.68rem] font-semibold uppercase tracking-widest;
+    background: rgb(var(--accent) / 0.08);
+    color: rgb(var(--accent));
+    letter-spacing: 0.14em;
   }
 }

@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${onest.variable} ${literata.variable}`}>
+    <html lang="ru" className={`${onest.variable} ${literata.variable} scroll-smooth`}>
       <body
         className={`${onest.className} antialiased text-foreground`}
       >

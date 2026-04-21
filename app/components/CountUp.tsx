@@ -10,8 +10,8 @@ interface CountUpProps {
   className?: string;
 }
 
-function easeInOutCubic(t: number): number {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
 }
 
 export default function CountUp({ target, suffix = "", duration = 1500, delay = 0, className = "" }: CountUpProps) {
@@ -35,7 +35,7 @@ export default function CountUp({ target, suffix = "", duration = 1500, delay = 
               const animate = (now: number) => {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                const eased = easeInOutCubic(progress);
+                const eased = easeOutCubic(progress);
                 setValue(Math.floor(eased * target));
 
                 if (progress < 1) {

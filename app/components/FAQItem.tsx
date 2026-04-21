@@ -16,32 +16,50 @@ export default function FAQItem({ faq }: { faq: FAQ }) {
       <dt>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex w-full items-start justify-between gap-4 text-left cursor-pointer group"
+          className="group flex w-full cursor-pointer items-start justify-between gap-4 text-left active:scale-[0.998]"
+          style={{ transition: "transform 140ms cubic-bezier(0.23, 1, 0.32, 1)" }}
           aria-expanded={isOpen}
         >
-          <span className="text-base font-semibold leading-snug text-foreground group-hover:text-accent transition-colors duration-200">
+          <span
+            className="text-base font-semibold leading-snug text-foreground group-hover:text-accent"
+            style={{ transition: "color 180ms ease-out" }}
+          >
             {faq.question}
           </span>
-          <span className="flex-shrink-0 mt-0.5 flex h-5 w-5 items-center justify-center rounded-full ring-1 ring-border group-hover:ring-accent/30 transition-all duration-200">
+          <span
+            className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ring-1 ring-border group-hover:ring-accent/30"
+            style={{ transition: "box-shadow 180ms ease-out, background-color 180ms ease-out" }}
+          >
             <ChevronDownIcon
-              className={`size-3.5 text-muted transition-transform duration-300 ease-in-out ${
-                isOpen ? "-rotate-180" : "rotate-0"
-              }`}
+              className="size-3.5 text-muted"
+              style={{
+                transition: "transform 220ms cubic-bezier(0.23, 1, 0.32, 1)",
+                transform: isOpen ? "rotate(-180deg)" : "rotate(0deg)",
+              }}
               aria-hidden="true"
             />
           </span>
         </button>
       </dt>
       <dd
-        className="overflow-hidden transition-all duration-300 ease-in-out"
+        className="grid"
         style={{
-          maxHeight: isOpen ? "300px" : "0px",
-          opacity: isOpen ? 1 : 0,
+          gridTemplateRows: isOpen ? "1fr" : "0fr",
+          transition: "grid-template-rows 280ms cubic-bezier(0.23, 1, 0.32, 1)",
         }}
       >
-        <p className="pt-3 pr-10 text-sm sm:text-base leading-relaxed text-muted">
-          {faq.answer}
-        </p>
+        <div className="overflow-hidden">
+          <p
+            className="pt-3 pr-10 text-sm sm:text-base leading-relaxed text-muted"
+            style={{
+              opacity: isOpen ? 1 : 0,
+              transition: "opacity 200ms ease-out",
+              transitionDelay: isOpen ? "80ms" : "0ms",
+            }}
+          >
+            {faq.answer}
+          </p>
+        </div>
       </dd>
     </div>
   )

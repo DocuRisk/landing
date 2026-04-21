@@ -15,6 +15,10 @@ import {
   Zap,
   TrendingUp,
   Crown,
+  PenLine,
+  ShieldCheck,
+  FileCheck,
+  Eye,
 } from "lucide-react"
 import FAQItem from "./components/FAQItem"
 import CountUp from "./components/CountUp"
@@ -116,6 +120,27 @@ const steps = [
   },
 ]
 
+const improvements = [
+  {
+    name: "Исправление формулировок",
+    description:
+      "ИИ предложит безопасные формулировки вместо рискованных и двусмысленных пунктов.",
+    icon: PenLine,
+  },
+  {
+    name: "Защита ваших интересов",
+    description:
+      "Переработает односторонние условия, чтобы права и обязанности сторон были сбалансированы.",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Готовый документ",
+    description:
+      "Получите улучшенную версию договора в формате Word — с учётом всех правок.",
+    icon: FileCheck,
+  },
+]
+
 const steps_create = [
   {
     step: 1,
@@ -158,11 +183,22 @@ const audiences = [
 
 const packages = [
   {
+    id: "micro",
+    name: "Микро",
+    price: 199,
+    credits: 10,
+    icon: Eye,
+    iconBg: "bg-stone-100",
+    iconColor: "text-stone-600",
+  },
+  {
     id: "start",
     name: "Старт",
     price: 990,
     credits: 55,
     icon: Zap,
+    iconBg: "bg-sky-50",
+    iconColor: "text-sky-600",
   },
   {
     id: "business",
@@ -170,6 +206,8 @@ const packages = [
     price: 2990,
     credits: 180,
     icon: TrendingUp,
+    iconBg: "bg-accent/10",
+    iconColor: "text-accent",
   },
   {
     id: "pro",
@@ -177,6 +215,8 @@ const packages = [
     price: 5990,
     credits: 400,
     icon: Crown,
+    iconBg: "bg-amber-50",
+    iconColor: "text-amber-600",
   },
 ]
 
@@ -229,8 +269,14 @@ export default function Home() {
           />
           <nav
             className="flex shrink-0 flex-nowrap items-center gap-1.5 sm:gap-5"
-            aria-label="Запуск бота"
+            aria-label="Навигация и запуск бота"
           >
+            <a
+              className="hidden text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:inline-flex"
+              href="#pricing"
+            >
+              Цены
+            </a>
             <a
               className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
               href="https://t.me/dogovor_check_bot"
@@ -269,13 +315,14 @@ export default function Home() {
           <h1 className="hero-fade-1 font-serif text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.75rem] leading-[1.1]">
             <span className="group relative inline-flex">
               <span
-                className="inline-flex items-center border-b-2 border-foreground/10 italic transition-all duration-200 hover:border-accent/50"
+                className="inline-flex items-center border-b-2 border-foreground/10 italic hover:border-accent/50"
+                style={{ transition: "border-color 180ms ease-out" }}
                 title="Искусственный интеллект"
                 aria-label="Искусственный интеллект"
               >
                 ИИ
               </span>
-              <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-lg bg-foreground px-3 py-2 text-sm not-italic font-sans font-semibold tracking-normal text-background opacity-0 shadow-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+              <span className="tooltip-pop pointer-events-none absolute left-1/2 top-full z-20 mt-3 whitespace-nowrap rounded-lg bg-foreground px-3 py-2 text-sm not-italic font-sans font-semibold tracking-normal text-background shadow-xl">
                 Искусственный интеллект
               </span>
             </span>{" "}
@@ -393,8 +440,8 @@ export default function Home() {
               {checks.map((check, i) => (
                 <RevealOnScroll
                   key={check.name}
-                  delay={i * 80}
-                  className="flex flex-col rounded-2xl bg-white p-6 ring-1 ring-border transition-shadow duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] sm:p-8"
+                  delay={i * 60}
+                  className="card flex flex-col p-6 sm:p-8"
                 >
                   <check.icon className="mb-5 size-8 text-accent" aria-hidden />
                   <h3 className="mb-2.5 font-serif text-lg font-semibold leading-tight tracking-tight">
@@ -424,15 +471,13 @@ export default function Home() {
             {steps.map((step, i) => (
               <RevealOnScroll
                 key={step.name}
-                delay={i * 100}
+                delay={i * 70}
                 className="flex flex-col items-center text-center"
               >
                 <div className="mb-5">
                   <Image src={step.image} alt={step.name} width={96} height={96} />
                 </div>
-                <span className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent/60">
-                  Шаг {step.step}
-                </span>
+                <span className="step-chip mb-3">Шаг {step.step}</span>
                 <h3 className="mb-3 text-xl font-semibold tracking-tight">{step.name}</h3>
                 <p className="max-w-[240px] text-sm leading-relaxed text-muted">
                   {step.description}
@@ -462,6 +507,39 @@ export default function Home() {
         </section>
 
         {/* ═══════════════════════════════════════════
+            DOCUMENT IMPROVEMENT
+        ═══════════════════════════════════════════ */}
+        <section className="section-document bg-stone-100/60 py-16 sm:py-24">
+          <RevealOnScroll className="mb-12 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
+              Улучшение документа
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              ИИ доработает документ за вас — переформулирует рискованные
+              пункты и подготовит обновлённый договор.
+            </p>
+          </RevealOnScroll>
+
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+            {improvements.map((item, i) => (
+              <RevealOnScroll
+                key={item.name}
+                delay={i * 60}
+                className="card flex flex-col p-7 sm:p-8"
+              >
+                <item.icon className="mb-5 size-8 text-accent" aria-hidden />
+                <h3 className="mb-2.5 font-serif text-lg font-semibold leading-tight tracking-tight">
+                  {item.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted">
+                  {item.description}
+                </p>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════
             HOW CONTRACT CREATED
         ═══════════════════════════════════════════ */}
         <section className="section-document py-16 sm:py-24">
@@ -473,13 +551,14 @@ export default function Home() {
               ИИ создаст{" "}
               <span className="group relative inline-flex">
                 <span
-                  className="inline-flex items-center border-b border-muted/40 italic transition-all duration-200 hover:border-accent/50"
+                  className="inline-flex items-center border-b border-muted/40 italic hover:border-accent/50"
+                  style={{ transition: "border-color 180ms ease-out" }}
                   title="Паритет (от лат. paritas — равенство) — это равноправие, равноценность, равенство сторон или показателей в чем-либо."
                   aria-label="Паритет (от лат. paritas — равенство) — это равноправие, равноценность, равенство сторон или показателей в чем-либо."
                 >
                   паритетный
                 </span>
-                <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-max max-w-[min(16rem,calc(100vw-2rem))] -translate-x-1/2 translate-y-1 rounded-lg bg-foreground px-3 py-2 text-left text-sm not-italic font-sans font-medium leading-snug tracking-normal text-background opacity-0 shadow-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="tooltip-pop pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-max max-w-[min(16rem,calc(100vw-2rem))] rounded-lg bg-foreground px-3 py-2 text-left text-sm not-italic font-sans font-medium leading-snug tracking-normal text-background shadow-xl">
                   Паритет (от лат. paritas — равенство) — это равноправие, равноценность,
                   равенство сторон или показателей в чем-либо.
                 </span>
@@ -492,15 +571,13 @@ export default function Home() {
             {steps_create.map((step, i) => (
               <RevealOnScroll
                 key={step.name}
-                delay={i * 100}
+                delay={i * 70}
                 className="flex flex-col items-center text-center"
               >
                 <div className="mb-5">
                   <Image src={step.image} alt={step.name} width={96} height={96} />
                 </div>
-                <span className="mb-2 text-xs font-semibold uppercase tracking-widest text-accent/60">
-                  Шаг {step.step}
-                </span>
+                <span className="step-chip mb-3">Шаг {step.step}</span>
                 <h3 className="mb-3 text-xl font-semibold tracking-tight">{step.name}</h3>
                 <p className="max-w-[240px] text-sm leading-relaxed text-muted">
                   {step.description}
@@ -543,8 +620,8 @@ export default function Home() {
             {audiences.map((audience, i) => (
               <RevealOnScroll
                 key={audience.name}
-                delay={i * 80}
-                className="flex flex-col rounded-2xl bg-white p-8 ring-1 ring-border transition-shadow duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)]"
+                delay={i * 60}
+                className="card flex flex-col p-8"
               >
                 <div className="mb-6">
                   <Image src={audience.image} alt={audience.name} width={180} height={180} />
@@ -577,26 +654,69 @@ export default function Home() {
         </section>
 
         {/* ═══════════════════════════════════════════
-            BOTTOM CTA
+            BOTTOM CTA (hidden — CTA перенесён в секцию «Пакеты кредитов»)
         ═══════════════════════════════════════════ */}
-        <section className="section-document py-16 sm:py-24">
-          <RevealOnScroll className="flex flex-col items-center text-center">
-            <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-              Попробуйте бесплатно прямо сейчас
+        {false && (
+          <section className="section-document py-16 sm:py-24">
+            <RevealOnScroll className="flex flex-col items-center text-center">
+              <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
+                Попробуйте бесплатно прямо сейчас
+              </h2>
+              <div className="mt-6 w-full max-w-md px-5 py-4 text-center sm:px-6">
+                <p className="text-lg font-semibold tracking-tight text-foreground">
+                  Получите в два раза больше кредитов
+                </p>
+                <p className="mt-2 text-sm text-muted">
+                  <span className="mr-1.5 inline-block line-through decoration-2 decoration-foreground/20">
+                    12 кредитов
+                  </span>
+                  <span className="font-medium text-accent">24 кредита</span>
+                  {' '}для проверки или генерации договоров в боте.
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <a
+                  className="btn btn-primary text-base px-7 py-3.5"
+                  href="https://t.me/dogovor_check_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image src="/tg_white.svg" alt="Telegram" width={20} height={20} />
+                  Открыть в Telegram
+                </a>
+                <a
+                  className="btn btn-secondary text-base px-7 py-3.5"
+                  href="https://max.ru/id450125033950_1_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image src="/max_accent.svg" alt="Max" width={20} height={20} />
+                  Открыть в Max
+                </a>
+              </div>
+            </RevealOnScroll>
+          </section>
+        )}
+
+        {/* ═══════════════════════════════════════════
+            TOKEN PACKAGES
+        ═══════════════════════════════════════════ */}
+        <section
+          id="pricing"
+          className="section-document scroll-mt-24 py-16 sm:py-24"
+        >
+          <RevealOnScroll className="mb-12 flex flex-col items-center text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
+              Пакеты кредитов
             </h2>
-            <div className="mt-6 w-full max-w-md px-5 py-4 text-center sm:px-6">
-              <p className="text-lg font-semibold tracking-tight text-foreground">
-                Получите в два раза больше кредитов
-              </p>
-              <p className="mt-2 text-sm text-muted">
-                <span className="mr-1.5 inline-block line-through decoration-2 decoration-foreground/20">
-                  12 кредитов
-                </span>
-                <span className="font-medium text-accent">24 кредита</span>
-                {' '}для проверки или генерации договоров в боте.
-              </p>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              Чем больше пакет — тем выгоднее каждый кредит
+            </p>
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 ring-1 ring-emerald-200/70">
+              <Zap className="size-4" aria-hidden />
+              24 бесплатных кредита при запуске бота — попробуйте без оплаты
             </div>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               <a
                 className="btn btn-primary text-base px-7 py-3.5"
                 href="https://t.me/dogovor_check_bot"
@@ -617,39 +737,35 @@ export default function Home() {
               </a>
             </div>
           </RevealOnScroll>
-        </section>
 
-        {/* ═══════════════════════════════════════════
-            TOKEN PACKAGES
-        ═══════════════════════════════════════════ */}
-        <section className="section-document bg-stone-100/60 py-16 sm:py-24">
-          <RevealOnScroll className="mb-12 text-center sm:mb-16">
-            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
-              Пакеты кредитов
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
-              Чем больше пакет — тем выгоднее каждый кредит
-            </p>
-          </RevealOnScroll>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {packages.map((pkg, i) => {
               const pricePerCredit = (pkg.price / pkg.credits).toLocaleString("ru-RU", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })
               const Icon = pkg.icon
+              const basePerCredit = packages[0].price / packages[0].credits
+              const currentPerCredit = pkg.price / pkg.credits
+              const savings = Math.round((1 - currentPerCredit / basePerCredit) * 100)
               return (
                 <RevealOnScroll
                   key={pkg.id}
-                  delay={i * 80}
-                  className="flex flex-col rounded-2xl bg-white p-7 ring-1 ring-border transition-shadow duration-300 hover:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] sm:p-8"
+                  delay={i * 60}
+                  className="card flex flex-col p-7 sm:p-8"
                 >
                   <div className="mb-5 flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/8">
-                      <Icon className="size-5 text-accent" aria-hidden />
+                    <div
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${pkg.iconBg}`}
+                    >
+                      <Icon className={`size-5 ${pkg.iconColor}`} aria-hidden />
                     </div>
                     <h3 className="font-semibold tracking-tight">{pkg.name}</h3>
+                    {savings > 0 && (
+                      <span className="ml-auto rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200/70">
+                        −{savings}%
+                      </span>
+                    )}
                   </div>
 
                   <div className="mb-6">
@@ -663,8 +779,8 @@ export default function Home() {
                     <span className="font-serif text-2xl font-semibold tracking-tight">
                       {pkg.price.toLocaleString("ru-RU")} ₽
                     </span>
-                    <span className="rounded-full bg-accent/8 px-3 py-1 text-xs font-semibold text-accent ring-1 ring-accent/15">
-                      {pricePerCredit}&thinsp;₽&thinsp;/&thinsp;кредит
+                    <span className="text-xs tabular-nums text-muted font-medium tracking-tight">
+                      {pricePerCredit} ₽ / кредит
                     </span>
                   </div>
                 </RevealOnScroll>
