@@ -249,7 +249,7 @@ const faqs = [
   {
     question: "Можно ли попробовать бесплатно?",
     answer:
-      "Да. После запуска бота вы получите 24 кредита. Обычно этого хватает, чтобы создать первый документ или проверить 1-3 договора.",
+      "Да. После запуска бота вы получите 3 кредита. Обычно этого хватает, чтобы создать первый документ или проверить один небольшой договор.",
   },
 ]
 
@@ -663,14 +663,8 @@ export default function Home() {
                 Попробуйте бесплатно прямо сейчас
               </h2>
               <div className="mt-6 w-full max-w-md px-5 py-4 text-center sm:px-6">
-                <p className="text-lg font-semibold tracking-tight text-foreground">
-                  Получите в два раза больше кредитов
-                </p>
                 <p className="mt-2 text-sm text-muted">
-                  <span className="mr-1.5 inline-block line-through decoration-2 decoration-foreground/20">
-                    12 кредитов
-                  </span>
-                  <span className="font-medium text-accent">24 кредита</span>
+                  <span className="font-medium text-accent">3 бесплатных кредита</span>
                   {' '}для проверки или генерации договоров в боте.
                 </p>
               </div>
@@ -714,7 +708,7 @@ export default function Home() {
             </p>
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 ring-1 ring-emerald-200/70">
               <Zap className="size-4" aria-hidden />
-              24 бесплатных кредита при запуске бота — попробуйте без оплаты
+              3 бесплатных кредита при запуске бота — попробуйте без оплаты
             </div>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <a
