@@ -18,10 +18,14 @@ import {
   PenLine,
   ShieldCheck,
   FileCheck,
+  FileText,
   Eye,
+  TextQuote,
+  Users,
 } from "lucide-react"
 import FAQItem from "./components/FAQItem"
 import CountUp from "./components/CountUp"
+import MobileBotBar from "./components/MobileBotBar"
 import RevealOnScroll from "./components/RevealOnScroll"
 
 const features = [
@@ -163,23 +167,128 @@ const steps_create = [
   },
 ]
 
-const audiences = [
+const reportItems = [
   {
-    name: "Обычным людям",
-    description: "Проверка договоров аренды, найма, купли-продажи авто или квартиры.",
-    image: "/person_1.svg",
+    name: "Оценка для каждой стороны",
+    description:
+      "Отдельный вывод по каждой стороне: выгодные условия, приемлемые или невыгодные.",
+    icon: Scale,
   },
   {
-    name: "Фрилансерам",
-    description: "Анализ договоров на оказание услуг, чтобы избежать штрафов и неоплат.",
-    image: "/person_2.svg",
+    name: "Риски со ссылкой на пункт",
+    description:
+      "Штрафы, сроки, оплата и обязанности — с указанием пункта договора.",
+    icon: TextQuote,
   },
   {
-    name: "Бизнесу",
-    description: "Быстрая проверка договоров контрагентов до отправки юристу.",
-    image: "/person_3.svg",
+    name: "Сравнение с нормой рынка",
+    description:
+      "Отметка, где условие жёстче, мягче или соответствует типовой практике для этого вида договора.",
+    icon: ChartArea,
+  },
+  {
+    name: "PDF и вопросы по документу",
+    description:
+      "Полный отчёт скачивается в PDF. После анализа можно задать вопросы по тексту документа.",
+    icon: FileText,
   },
 ]
+
+const protocolItems = [
+  {
+    name: "Сторона договора",
+    description: "Вы указываете, для какой стороны готовить протокол.",
+    icon: Users,
+  },
+  {
+    name: "Состав протокола",
+    description:
+      "Условия с высоким и средним риском и условия жёстче нормы рынка — до 12 пунктов.",
+    icon: ListChecks,
+  },
+  {
+    name: "Файл Word",
+    description:
+      "Протокол скачивается в формате Word. Если таких пунктов нет, кредиты не списываются.",
+    icon: FileCheck,
+  },
+]
+
+const tasks = [
+  {
+    name: "Проверка договора",
+    description:
+      "Отправьте файл в бот. При достаточном балансе анализ запускается автоматически.",
+    icon: ScanSearch,
+  },
+  {
+    name: "Ответ контрагенту",
+    description: "После анализа можно получить протокол разногласий в Word.",
+    icon: FileCheck,
+  },
+  {
+    name: "Новый документ",
+    description: "Опишите задачу — сервис подготовит черновик договора в Word.",
+    icon: BookText,
+  },
+]
+
+const serviceRates = [
+  { name: "Договор на 5 страниц в Word", value: "5 кредитов на анализ" },
+  { name: "Фото или скан", value: "2 кредита за страницу, затем анализ" },
+  { name: "Новый договор по описанию", value: "10 кредитов" },
+  { name: "Протокол разногласий", value: "5 кредитов" },
+  { name: "Улучшение или правка", value: "2 кредита за страницу" },
+]
+
+const trustPoints = [
+  "Каждое замечание содержит цитату из текста договора",
+  "Сравнение с типовой практикой для данного вида договора",
+  "Документы не используются для обучения модели",
+]
+
+const TELEGRAM_BOT_URL = "https://t.me/dogovor_check_bot"
+const MAX_BOT_URL = "https://max.ru/id450125033950_1_bot"
+
+function TelegramLink({
+  label,
+  className = "btn btn-primary text-base px-7 py-3.5",
+}: {
+  label: string
+  className?: string
+}) {
+  return (
+    <a
+      className={className}
+      href={TELEGRAM_BOT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image src="/tg_white.svg" alt="" width={20} height={20} />
+      {label}
+    </a>
+  )
+}
+
+function MaxLink({
+  label = "Открыть в Max",
+  className = "btn btn-secondary text-base px-7 py-3.5",
+}: {
+  label?: string
+  className?: string
+}) {
+  return (
+    <a
+      className={className}
+      href={MAX_BOT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image src="/max_accent.svg" alt="" className="icon-accent" width={20} height={20} />
+      {label}
+    </a>
+  )
+}
 
 const packages = [
   {
@@ -249,7 +358,12 @@ const faqs = [
   {
     question: "Можно ли попробовать бесплатно?",
     answer:
-      "Да. После запуска бота вы получите 3 кредита. Обычно этого хватает, чтобы создать первый документ или проверить один небольшой договор.",
+      "Да. При первом запуске на балансе 3 кредита. Этого достаточно для анализа договора в Word объёмом до 3 страниц. Создание нового документа стоит 10 кредитов. Вопрос по праву РФ в чате кредиты не списывает.",
+  },
+  {
+    question: "Как списываются кредиты?",
+    answer:
+      "Анализ стоит 1 кредит за страницу. Фото и сканы — 2 кредита за страницу, потому что текст нужно распознать. Улучшение и правка — тоже 2 кредита за страницу. Протокол разногласий — 5 кредитов, генерация нового документа — 10. Пакеты на сайте те же, что в боте.",
   },
 ]
 
@@ -279,7 +393,7 @@ export default function Home() {
             </a>
             <a
               className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
-              href="https://t.me/dogovor_check_bot"
+              href={TELEGRAM_BOT_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Открыть Telegram-бота"
@@ -289,7 +403,7 @@ export default function Home() {
             </a>
             <a
               className="header-bot-link flex flex-nowrap items-center gap-2 rounded-full p-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-accent sm:rounded-none sm:p-0"
-              href="https://max.ru/id450125033950_1_bot"
+              href={MAX_BOT_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Открыть Max-бота"
@@ -329,35 +443,19 @@ export default function Home() {
             проверит договор <br className="hidden sm:block" /> или создаст новый
           </h1>
 
-          <p className="hero-fade-2 mt-6 max-w-md text-base sm:text-lg leading-relaxed text-muted">
-            Найдёт риски и спорные пункты <br className="hidden sm:block" /> или создаст
-            договор по вашему описанию <br className="hidden sm:block" /> за 1 минуту
+          <p className="hero-fade-2 mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-muted">
+            Оценит условия для каждой стороны, найдёт риски и спорные пункты, подготовит
+            протокол разногласий. Или создаст договор по вашему описанию за 1–2 минуты.
           </p>
 
           <div className="hero-fade-3 mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              className="btn btn-primary text-base px-7 py-3.5"
-              href="https://t.me/dogovor_check_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src="/tg_white.svg" alt="Telegram" width={20} height={20} />
-              Запустить в Telegram
-            </a>
-            <a
-              className="btn btn-secondary text-base px-7 py-3.5"
-              href="https://max.ru/id450125033950_1_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src="/max_accent.svg" alt="Max" className="icon-accent" width={20} height={20} />
-              Запустить в Max
-            </a>
+            <TelegramLink label="Проверить в Telegram" />
+            <MaxLink label="Открыть в Max" />
           </div>
 
           <div className="hero-fade-4 mt-7">
             <p className="mb-3 text-sm tracking-wide text-muted/60">
-              Попробовать бесплатно · без регистрации · от 1 минуты
+              3 кредита при запуске · без регистрации · результат за 1–2 минуты
             </p>
             <div className="flex flex-row items-center justify-center gap-5">
               <a
@@ -432,6 +530,40 @@ export default function Home() {
         </section>
 
         {/* ═══════════════════════════════════════════
+            REPORT CONTENTS
+        ═══════════════════════════════════════════ */}
+        <section className="section-document bg-stone-100/60 py-16 sm:py-24">
+          <RevealOnScroll className="mb-12 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
+              Что содержит отчёт
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              Краткий вывод в чате и полный отчёт в PDF.
+            </p>
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {reportItems.map((item, i) => (
+              <RevealOnScroll
+                key={item.name}
+                delay={i * 60}
+                className="card flex flex-col p-6 sm:p-8"
+              >
+                <item.icon className="mb-5 size-8 text-accent" aria-hidden />
+                <h3 className="mb-2.5 font-serif text-lg font-semibold leading-tight tracking-tight">
+                  {item.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted">{item.description}</p>
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <RevealOnScroll className="mt-10 flex justify-center" delay={80}>
+            <TelegramLink label="Отправить договор в Telegram" />
+          </RevealOnScroll>
+        </section>
+
+        {/* ═══════════════════════════════════════════
             WHAT AI CHECKS
         ═══════════════════════════════════════════ */}
         <section className="section-document py-16 sm:py-24">
@@ -485,6 +617,10 @@ export default function Home() {
               </RevealOnScroll>
             ))}
           </div>
+
+          <RevealOnScroll className="mt-12 flex justify-center sm:mt-14" delay={80}>
+            <TelegramLink label="Отправить договор в Telegram" />
+          </RevealOnScroll>
         </section>
 
         {/* ═══════════════════════════════════════════
@@ -537,6 +673,47 @@ export default function Home() {
               </RevealOnScroll>
             ))}
           </div>
+
+          <RevealOnScroll className="mt-12 flex justify-center sm:mt-14" delay={80}>
+            <TelegramLink label="Получить версию в Word" />
+          </RevealOnScroll>
+        </section>
+
+        {/* ═══════════════════════════════════════════
+            DISAGREEMENT PROTOCOL
+        ═══════════════════════════════════════════ */}
+        <section className="section-document py-16 sm:py-24">
+          <RevealOnScroll className="mb-12 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
+              Протокол разногласий
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              Если договор получен от контрагента, сервис подготовит документ для переговоров.
+            </p>
+          </RevealOnScroll>
+
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+            {protocolItems.map((item, i) => (
+              <RevealOnScroll
+                key={item.name}
+                delay={i * 60}
+                className="card flex flex-col p-7 sm:p-8"
+              >
+                <item.icon className="mb-5 size-8 text-accent" aria-hidden />
+                <h3 className="mb-2.5 font-serif text-lg font-semibold leading-tight tracking-tight">
+                  {item.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted">{item.description}</p>
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <RevealOnScroll className="mt-10 text-center" delay={80}>
+            <p className="text-sm font-medium tracking-tight">5 кредитов за протокол</p>
+            <div className="mt-6 flex justify-center">
+              <TelegramLink label="Собрать протокол в Telegram" />
+            </div>
+          </RevealOnScroll>
         </section>
 
         {/* ═══════════════════════════════════════════
@@ -612,31 +789,53 @@ export default function Home() {
         <section className="section-document py-16 sm:py-24">
           <RevealOnScroll className="mb-12 text-center sm:mb-16">
             <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
-              Для кого этот сервис
+              Три задачи
             </h2>
           </RevealOnScroll>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {audiences.map((audience, i) => (
+            {tasks.map((task, i) => (
               <RevealOnScroll
-                key={audience.name}
+                key={task.name}
                 delay={i * 60}
                 className="card flex flex-col p-8"
               >
-                <div className="mb-6">
-                  <Image src={audience.image} alt={audience.name} width={180} height={180} />
-                </div>
-                <h3 className="mb-3 text-xl font-semibold tracking-tight">{audience.name}</h3>
-                <p className="text-sm leading-relaxed text-muted">{audience.description}</p>
+                <task.icon className="mb-5 size-8 text-accent" aria-hidden />
+                <h3 className="mb-3 text-xl font-semibold tracking-tight">{task.name}</h3>
+                <p className="text-sm leading-relaxed text-muted">{task.description}</p>
               </RevealOnScroll>
             ))}
           </div>
+
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <TelegramLink label="Начать в Telegram" />
+            <MaxLink label="в Max" />
+          </div>
+
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-muted">
+            Аренда, услуги, подряд, трудовой договор, купля-продажа, поставка, займ,
+            соглашение о конфиденциальности.
+          </p>
         </section>
 
         {/* ═══════════════════════════════════════════
             FAQ
         ═══════════════════════════════════════════ */}
         <section className="section-document bg-stone-100/60 py-16 sm:py-24">
+          <RevealOnScroll className="mb-14 sm:mb-16">
+            <ul className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
+              {trustPoints.map((point) => (
+                <li
+                  key={point}
+                  className="flex gap-3 text-sm leading-relaxed text-foreground/80"
+                >
+                  <ShieldCheck className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </RevealOnScroll>
+
           <RevealOnScroll className="mb-10 text-center sm:mb-12">
             <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
               Частые вопросы
@@ -699,36 +898,40 @@ export default function Home() {
           id="pricing"
           className="section-document scroll-mt-24 py-16 sm:py-24"
         >
+          <RevealOnScroll className="mb-14 text-center sm:mb-16">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
+              Сколько это стоит
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
+              Кредиты списываются за страницы и за готовый документ.
+            </p>
+            <dl className="mx-auto mt-8 max-w-xl divide-y divide-border/70 text-left">
+              {serviceRates.map((rate) => (
+                <div key={rate.name} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                  <dt className="text-sm font-medium tracking-tight">{rate.name}</dt>
+                  <dd className="text-sm text-muted sm:text-right">{rate.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted">
+              На пакете «Микро» один кредит стоит 19,90 ₽. Анализ договора на 5 страниц — около 100 ₽.
+            </p>
+          </RevealOnScroll>
+
           <RevealOnScroll className="mb-12 flex flex-col items-center text-center sm:mb-16">
             <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-5xl">
               Пакеты кредитов
             </h2>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted">
-              Чем больше пакет — тем выгоднее каждый кредит
+              Чем больше пакет, тем ниже цена кредита.
             </p>
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 ring-1 ring-emerald-200/70">
               <Zap className="size-4" aria-hidden />
-              3 бесплатных кредита при запуске бота — попробуйте без оплаты
+              3 кредита при запуске бота
             </div>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <a
-                className="btn btn-primary text-base px-7 py-3.5"
-                href="https://t.me/dogovor_check_bot"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src="/tg_white.svg" alt="Telegram" width={20} height={20} />
-                Открыть в Telegram
-              </a>
-              <a
-                className="btn btn-secondary text-base px-7 py-3.5"
-                href="https://max.ru/id450125033950_1_bot"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src="/max_accent.svg" alt="Max" width={20} height={20} />
-                Открыть в Max
-              </a>
+              <TelegramLink label="Проверить в Telegram" />
+              <MaxLink />
             </div>
           </RevealOnScroll>
 
@@ -784,6 +987,8 @@ export default function Home() {
         </section>
 
       </main>
+
+      <MobileBotBar />
     </div>
   )
 }

@@ -185,6 +185,12 @@ body {
   }
 
   /* Step number chip */
+  @media (max-width: 639px) {
+    body:has(.mobile-bot-bar) footer {
+      padding-bottom: 5.5rem;
+    }
+  }
+
   .step-chip {
     @apply inline-flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-[0.68rem] font-semibold uppercase tracking-widest;
     background: rgb(var(--accent) / 0.08);
